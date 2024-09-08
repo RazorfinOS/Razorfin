@@ -8,6 +8,18 @@
 
 ## Usage
 
+Building version 10
+
+```bash
+podman build -t localhost/heliumos-bootc:10 -f 10/Containerfile .
+```
+
+Building version 10-edge
+
+```bash
+podman build -t localhost/heliumos-bootc:10-edge -f 10/Containerfile.edge .
+```
+
 Building version 9
 
 ```bash
