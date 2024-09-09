@@ -20,4 +20,4 @@ dnf install -y \
 rm -rdf /usr/lib/modules/5.*
 
 
-dracut -vf /usr/lib/modules/$kver/initramfs.img $kver
+#dracut -vf /usr/lib/modules/$kver/initramfs.img $kver

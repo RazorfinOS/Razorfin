@@ -5,5 +5,5 @@ set -e
 
 
 dnf install -y \
-    distrobox \
     git
+#    distrobox
