@@ -5,5 +5,6 @@ set -e
 
 
 dnf install -y \
+    bootc-gtk \
     git
 #    distrobox
