@@ -13,10 +13,22 @@ dnf install -y \
     chromium \
     git
 
+
 dnf install -y \
     distrobox \
-    podman-compose \
-    podman-docker
+    podman-compose
+
+
+dnf install -y \
+    docker-ce \
+    docker-ce-cli \
+    containerd.io \
+    docker-buildx-plugin \
+    docker-compose-plugin
+
+
+systemctl enable docker
+
 
     
 dnf install -y \
