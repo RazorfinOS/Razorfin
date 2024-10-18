@@ -38,6 +38,9 @@ dnf remove -y \
     totem \
     setroubleshoot \
     cockpit \
+    gnome-shell-extension-background-logo \
+    gnome-shell-extension-window-list \
+    gnome-classic-session
 
 
 glib-compile-schemas /usr/share/glib-2.0/schemas/
