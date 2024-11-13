@@ -11,7 +11,8 @@ dnf install -y \
 
 dnf install -y \
     chromium \
-    ocl-icd \ # https://bugzilla.redhat.com/show_bug.cgi?id=2316533
+    # https://bugzilla.redhat.com/show_bug.cgi?id=2316533
+    ocl-icd \
     git
 
 
