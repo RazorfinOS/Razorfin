@@ -8,10 +8,9 @@ set -e
 dnf install -y \
     https://repo.almalinux.org/almalinux/9/AppStream/x86_64/os/Packages/ocl-icd-2.2.13-4.el9.x86_64.rpm
 
-
+# https://bugzilla.redhat.com/show_bug.cgi?id=2316533
 dnf install -y \
     chromium \
-    # https://bugzilla.redhat.com/show_bug.cgi?id=2316533
     ocl-icd \
     git
 
