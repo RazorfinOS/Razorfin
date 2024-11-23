@@ -4,8 +4,8 @@
 set -e
 
 
-#dnf install -y --nobest \
-#   @kde-desktop-environment
+dnf install -y \
+	@"KDE Plasma Workspaces"
 
 
 dnf remove -y \
@@ -13,8 +13,8 @@ dnf remove -y \
     cockpit
 
 
-#systemctl enable \
-#    sddm.service
+systemctl enable \
+    sddm.service
 
 
 rm -rdf /var/run

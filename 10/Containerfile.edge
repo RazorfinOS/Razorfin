@@ -12,6 +12,9 @@ RUN ./repos.sh && rm repos.sh
 COPY 10/desktop.sh desktop.sh
 RUN ./desktop.sh && rm desktop.sh
 
+COPY 10/firewall.sh firewall.sh
+RUN ./firewall.sh && rm firewall.sh
+
 COPY 10/apps.sh apps.sh
 RUN ./apps.sh && rm apps.sh
 
@@ -27,7 +30,8 @@ RUN ./bootc.sh && rm bootc.sh
 
 COPY 10/kargs/10-heliumos.toml /usr/lib/bootc/kargs.d/10-heliumos.toml
 COPY 10/dracut/10-heliumos.conf /usr/lib/dracut/dracut.conf.d/10-heliumos.conf
-COPY 10/kernel-edge.sh kernel.sh
+#COPY 10/kernel-edge.sh kernel.sh
+COPY 10/kernel.sh kernel.sh
 RUN ./kernel.sh && rm kernel.sh
 
 RUN rm -rdf /workdir
