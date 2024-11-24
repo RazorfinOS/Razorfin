@@ -13,6 +13,11 @@ dnf remove -y \
     cockpit
 
 
+rm -rf /usr/share/plasma/look-and-feel/org.fedoraproject.fedora.desktop
+rm -rf /usr/share/wallpapers/fedora
+rm -rf /usr/share/backgrounds/*
+
+
 systemctl enable \
     sddm.service
 
