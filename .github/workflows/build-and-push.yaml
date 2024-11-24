@@ -65,9 +65,4 @@ jobs:
             export TAG=$VERSION-$VARIANT
           fi
 
-          if [[ $TAG == "10" ]]; then
-            # Only 10-edge works for EL10
-            exit 0
-          else
-
           podman push $REGISTRY_IMAGE docker://$REGISTRY/$REGISTRY_IMAGE:$TAG
