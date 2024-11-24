@@ -1,0 +1,36 @@
+FROM quay.io/centos-bootc/centos-bootc:stream10
+
+WORKDIR /workdir
+
+COPY 10/flatpak-readonlyroot.toml flatpak.toml
+COPY 10/flatpak.sh flatpak.sh
+RUN ./flatpak.sh && rm flatpak.sh
+
+COPY 10/repos.sh repos.sh
+RUN ./repos.sh && rm repos.sh
+
+COPY 10/desktop.sh desktop.sh
+RUN ./desktop.sh && rm desktop.sh
+
+COPY 10/firewall.sh firewall.sh
+RUN ./firewall.sh && rm firewall.sh
+
+COPY 10/apps.sh apps.sh
+RUN ./apps.sh && rm apps.sh
+
+COPY 10/branding.sh branding.sh
+RUN ./branding.sh && rm branding.sh
+
+# COPY 10/systemd_services /workdir/systemd_services
+COPY 10/systemd.sh systemd.sh
+RUN ./systemd.sh && rm systemd.sh
+
+COPY 10/bootc.sh bootc.sh
+RUN ./bootc.sh && rm bootc.sh
+
+COPY 10/kargs/10-heliumos.toml /usr/lib/bootc/kargs.d/10-heliumos.toml
+COPY 10/dracut/10-heliumos.conf /usr/lib/dracut/dracut.conf.d/10-heliumos.conf
+COPY 10/kernel.sh kernel.sh
+RUN ./kernel.sh && rm kernel.sh
+
+RUN rm -rdf /workdir

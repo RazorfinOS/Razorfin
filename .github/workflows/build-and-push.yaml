@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-24.04
     strategy:
       matrix:
-        version: [9]
+        version: [9, 10]
         variant: ["", "edge"]
     steps:
       - name: Checkout repository
@@ -64,4 +64,10 @@ jobs:
           else
             export TAG=$VERSION-$VARIANT
           fi
+
+          if [[ $TAG == "10" ]]; then
+            # Only 10-edge works for EL10
+            exit 0
+          else
+
           podman push $REGISTRY_IMAGE docker://$REGISTRY/$REGISTRY_IMAGE:$TAG
