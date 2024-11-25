@@ -13,6 +13,11 @@ dnf install -y \
     distrobox
 
 
+# Appimage
+dnf install -y \
+    fuse
+
+
 #dnf install -y \
 #    docker-ce \
 #    docker-ce-cli \
