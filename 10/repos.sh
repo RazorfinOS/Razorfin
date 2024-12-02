@@ -26,7 +26,7 @@ dnf config-manager --set-enabled \
 
 
 dnf config-manager --save \
-    --setopt=exclude=PackageKit,PackageKit-command-not-found,rootfiles,firefox,spectacle
+    --setopt=exclude=PackageKit,PackageKit-command-not-found,rootfiles,firefox
 
 
 mkdir -p /etc/flatpak/remotes.d && \
