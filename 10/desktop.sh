@@ -4,7 +4,7 @@
 set -e
 
 
-dnf install -y \
+dnf install -y --nobest \
 	@"KDE Plasma Workspaces"
 
 
