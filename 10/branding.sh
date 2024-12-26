@@ -122,4 +122,5 @@ The Distribution is released as GPLv2. Individual packages in the
 distribution come with their own licences. A copy of the GPLv2 license
 is included with the distribution media.
 EOF
+ln -sf /usr/share/heliumos-release/EULA /usr/share/redhat-release/EULA
 
