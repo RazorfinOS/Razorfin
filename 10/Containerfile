@@ -1,5 +1,7 @@
 FROM quay.io/centos-bootc/centos-bootc:stream10
 
+LABEL containers.bootc 1
+
 WORKDIR /workdir
 
 COPY 10/flatpak-readonlyroot.toml flatpak.toml
