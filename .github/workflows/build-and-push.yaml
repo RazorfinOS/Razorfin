@@ -36,8 +36,18 @@ jobs:
           else
             export CONTAINERFILE=$VERSION/Containerfile.$VARIANT
           fi
-          podman build -t $REGISTRY_IMAGE -f $CONTAINERFILE .
-
+          podman build \
+            -t $REGISTRY_IMAGE \
+            -f $CONTAINERFILE . \
+            --label "containers.bootc=1" \
+            --label "io.artifacthub.package.readme-url=https://codeberg.org/HeliumOS/bootc/raw/branch/release/README.md" \
+            --label "org.opencontainers.image.created=$(date --rfc-3339=seconds)" \
+            --label "org.opencontainers.image.description=An atomic desktop operating system for your devices" \
+            --label "org.opencontainers.image.source=https://codeberg.org/HeliumOS/bootc" \
+            --label "org.opencontainers.image.vendor=HeliumOS" \
+            --label "io.artifacthub.package.license=GPL-2.0-only" \
+            --label "io.artifacthub.package.logo-url=https://codeberg.org/HeliumOS/logo/src/commit/0ce8b5cd8f6d311924d84c9a9f4961da95306171/export/logo/logo-color-256x256.png"
+            
       - name: Login to registry
         env:
           REGISTRY_IMAGE: ${{ vars.registry_image }}
