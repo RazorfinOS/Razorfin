@@ -40,3 +40,5 @@ COPY 10/files.sh files.sh
 RUN ./files.sh && rm files.sh
 
 RUN rm -rdf /workdir
+
+RUN bootc container lint
