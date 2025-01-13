@@ -18,7 +18,8 @@ sed -i 's,https://centos.org/,https://www.heliumos.org/,g' /usr/lib/os-release &
     sed -i 's,CentOS Stream,HeliumOS,g' /usr/lib/os-release && \
     sed -i 's,centos,heliumos,g' /usr/lib/os-release && \
     sed -i 's,ID_LIKE="rhel fedora",ID_LIKE="rhel centos fedora",g' /usr/lib/os-release && \
-    sed -i 's,VENDOR_NAME="CentOS",VENDOR_NAME="HeliumOS",g' /usr/lib/os-release
+    sed -i 's,VENDOR_NAME="CentOS",VENDOR_NAME="HeliumOS",g' /usr/lib/os-release && \
+    sed -i 's,ANSI_COLOR="0;31",ANSI_COLOR="38;5;39",g' /usr/lib/os-release
 
 
 curl -o logo.tar.gz https://codeberg.org/HeliumOS/logo/archive/0ce8b5cd8f6d311924d84c9a9f4961da95306171.tar.gz && \
