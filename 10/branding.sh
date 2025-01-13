@@ -104,12 +104,9 @@ sed -i 's,/usr/share/wallpapers/Next/contents/images/5120x2880.png,/usr/share/wa
 
 ln -s /usr/share/wallpapers/Andromeda/contents/images/5338x5905.jpg /usr/share/backgrounds/default.png
 
-dnf install -y plymouth-theme-breeze
-mkdir -p /etc/plymouth
-cat <<EOF >>/etc/plymouth/plymouthd.conf
-[Daemon]
-Theme=breeze
-EOF
+
+dnf install -y plymouth-theme-spinner
+
 
 mkdir -p /usr/share/heliumos-release
 cat <<EOF >>/usr/share/heliumos-release/EULA

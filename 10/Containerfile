@@ -4,6 +4,10 @@ LABEL containers.bootc 1
 
 WORKDIR /workdir
 
+COPY 10/system_root system_root
+COPY 10/files.sh files.sh
+RUN ./files.sh && rm files.sh
+
 COPY 10/flatpak-readonlyroot.toml flatpak.toml
 COPY 10/flatpak.sh flatpak.sh
 RUN ./flatpak.sh && rm flatpak.sh
@@ -30,14 +34,8 @@ RUN ./systemd.sh && rm systemd.sh
 COPY 10/bootc.sh bootc.sh
 RUN ./bootc.sh && rm bootc.sh
 
-COPY 10/kargs/10-heliumos.toml /usr/lib/bootc/kargs.d/10-heliumos.toml
-COPY 10/dracut/10-heliumos.conf /usr/lib/dracut/dracut.conf.d/10-heliumos.conf
 COPY 10/kernel.sh kernel.sh
 RUN ./kernel.sh && rm kernel.sh
-
-COPY 10/system_root system_root
-COPY 10/files.sh files.sh
-RUN ./files.sh && rm files.sh
 
 RUN rm -rdf /workdir
 
