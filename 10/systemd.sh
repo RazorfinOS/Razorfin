@@ -3,4 +3,4 @@
 
 set -e
 
-
+systemctl mask hibernate.target
