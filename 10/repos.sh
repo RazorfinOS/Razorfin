@@ -16,13 +16,9 @@ dnf install -y \
 #    https://developer.download.nvidia.com/compute/cuda/repos/rhel9/x86_64/cuda-rhel9.repo
 
 
-#dnf config-manager  --add-repo \
-#    https://download.docker.com/linux/rhel/docker-ce.repo
-
 
 dnf config-manager --set-enabled \
     crb
-#    elrepo-kernel \
 
 
 dnf config-manager --save \

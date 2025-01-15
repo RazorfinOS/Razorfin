@@ -2,5 +2,5 @@
 
 set -e
 
-cp -rf system_root /
+cp -rf system_root/* /
 

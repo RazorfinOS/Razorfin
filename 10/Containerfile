@@ -27,7 +27,6 @@ RUN ./apps.sh && rm apps.sh
 COPY 10/branding.sh branding.sh
 RUN ./branding.sh && rm branding.sh
 
-# COPY 10/systemd_services /workdir/systemd_services
 COPY 10/systemd.sh systemd.sh
 RUN ./systemd.sh && rm systemd.sh
 
