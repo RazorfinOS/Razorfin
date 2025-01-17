@@ -9,7 +9,7 @@ dnf install -y \
 #    flatpak-builder
 
 
-mkdir /var/roothome
+mkdir -p /var/roothome
 
 
 #curl -O https://codeberg.org/HeliumOS/flatpak-readonlyroot/raw/tag/v0.2/flatpak-readonlyroot.py
