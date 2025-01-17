@@ -18,6 +18,3 @@ mv /opt /var/opt && \
 mv /usr/local /var/usrlocal && \
   ln -s /var/usrlocal /usr/local
 
-
-systemctl disable atd.service
-
