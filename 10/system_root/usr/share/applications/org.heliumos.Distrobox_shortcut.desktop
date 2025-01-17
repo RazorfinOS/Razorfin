@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Exec=konsole -e bash --rcfile <(echo "source ~/.bashrc && bash -c '(set -x; distrobox --help)'")
+Icon=utilities-terminal
+Categories=Development;Utility
+StartupNotify=true
+X-KDE-AuthorizeAction=shell_access
+StartupWMClass=konsole
+Keywords=distrobox;container;linux
+Name=Distrobox
+GenericName=Linux Container Helper
+Comment=Access Linux Containers
+
