@@ -26,7 +26,7 @@ except Exception as e:
 shell(f'bash {script_install_path}')
 
 with open(script_env_temp_path, 'w') as f:
-    f.write('eval "$(brew shellenv)" \n')
+    f.write('eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" \n')
     f.write('export PATH=$PATH:$(brew --prefix)/bin/ \n')
     f.write('export C_INCLUDE_PATH=$CC_INCLUDE_PATH:$(brew --prefix)/include/ \n')
     f.write('export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(brew --prefix)/lib/ \n')
