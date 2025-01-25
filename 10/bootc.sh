@@ -4,7 +4,7 @@
 set -e
 
 
-dnf install -y selinux-policy-40.13.13-1.el10
+dnf install -y selinux-policy
 
 
 sed -i 's,ExecStart=/usr/bin/bootc update --apply --quiet,ExecStart=/usr/bin/bootc update --quiet,g' \
