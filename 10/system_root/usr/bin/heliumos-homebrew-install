@@ -31,6 +31,7 @@ with open(script_env_temp_path, 'w') as f:
     f.write('export C_INCLUDE_PATH=$C_INCLUDE_PATH:$(brew --prefix)/include/ \n')
     f.write('export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:$(brew --prefix)/include/ \n')
     f.write('export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(brew --prefix)/lib/ \n')
+    f.write('export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:$(brew --prefix)/lib/pkgconfig/ \n')
 
 shell(f'sudo mv {script_env_temp_path} {script_env_path}')
 
