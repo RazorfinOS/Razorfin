@@ -10,7 +10,8 @@ dnf install -y --nobest \
 
 dnf remove -y \
     setroubleshoot \
-    cockpit
+    cockpit \
+    krfb
 
 
 rm -rf /usr/share/plasma/look-and-feel/org.fedoraproject.fedora.desktop
