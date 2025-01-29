@@ -5,11 +5,16 @@ set -e
 
 
 dnf install -y \
-    git \
-    angelfish
+    angelfish \
+    kolourpaint \
+    kcalc \
+    okular \
+    krdc \
+    skanlite
 
 
 dnf install -y \
+    git \
     distrobox \
     @development
 
