@@ -8,9 +8,7 @@ dnf install -y \
     angelfish \
     kolourpaint \
     kcalc \
-    okular \
-    krdc \
-    skanlite
+    okular 
 
 
 dnf install -y \
