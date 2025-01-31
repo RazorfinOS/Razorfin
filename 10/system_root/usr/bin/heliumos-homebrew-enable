@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -e
+
+curl -L -o /tmp/homebrew-install.sh https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+bash /tmp/homebrew-install.sh
+rm /tmp/homebrew-install.sh
+sed -i 's,# .bashrc,# .bashrc\nsource /usr/share/heliumos/feature/homebrew/env.sh # heliumos-homebrew DO NOT MODIFY\n,g' $HOME/.bashrc
+
+echo "****************************************"
+echo "--Complete--"
+echo "Run 'source ~/.bashrc' or restart your terminal to start using Homebrew with 'brew'!"

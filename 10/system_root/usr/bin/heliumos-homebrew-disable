@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -e
+
+run0 rm -rf /home/linuxbrew
+sed -i '/heliumos-homebrew/d' $HOME/.bashrc
+
+echo "****************************************"
+echo "--Complete--"
+echo "Homebrew has been removed from the system!"
