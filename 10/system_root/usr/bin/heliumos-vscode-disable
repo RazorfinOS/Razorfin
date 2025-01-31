@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -e
+
+run0 sh -c '
+    rm -rf /opt/VSCode-linux-x64
+    rm /usr/local/bin/code
+    rm /usr/local/share/applications/vscode.desktop
+'
+
+echo "****************************************"
+echo "--Complete--"
+echo "VSCode has been removed from the system!"

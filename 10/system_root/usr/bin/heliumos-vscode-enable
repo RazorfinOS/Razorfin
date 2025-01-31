@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -e
+
+curl -Lo /tmp/vscode.tar.gz 'https://code.visualstudio.com/sha/download?build=stable&os=linux-x64'
+tar -xzf /tmp/vscode.tar.gz
+rm /tmp/vscode.tar.gz
+
+run0 sh -c '
+    mv VSCode-linux-x64 /opt/
+    ln -sf /opt/VSCode-linux-x64/bin/code /usr/local/bin/
+    ln -sf /usr/share/heliumos/feature/vscode/vscode.desktop /usr/local/share/applications/
+'
+
+echo "****************************************"
+echo "--Complete--"
+echo "Run 'code' or check the Application Launcher to start VSCode!"
