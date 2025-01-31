@@ -3,6 +3,7 @@
 set -e
 
 run0 sh -c '
+    set -e
     rm -rf /opt/rancher-desktop
     rm -f /usr/local/bin/rancher-desktop
     rm -f /usr/local/share/applications/rancher-desktop.desktop

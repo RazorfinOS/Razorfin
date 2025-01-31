@@ -3,6 +3,7 @@
 set -e
 
 run0 sh -c '
+    set -e
     rm -rf /opt/VSCode-linux-x64
     rm /usr/local/bin/code
     rm /usr/local/share/applications/vscode.desktop

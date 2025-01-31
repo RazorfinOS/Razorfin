@@ -10,6 +10,7 @@ chmod +x /tmp/rancher-desktop.AppImage
 /tmp/rancher-desktop.AppImage --appimage-extract
 
 run0 sh -c '
+    set -e
     mkdir -p /opt/rancher-desktop
     mv /tmp/rancher-desktop.AppImage /opt/rancher-desktop/
     cp squashfs-root/rancher-desktop.desktop /opt/rancher-desktop/
