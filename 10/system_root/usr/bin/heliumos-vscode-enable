@@ -7,7 +7,7 @@ curl --retry 5 --retry-max-time 120 -L
 tar -xzf /tmp/vscode.tar.gz
 rm /tmp/vscode.tar.gz
 
-run0 sh -c '
+sudo sh -c '
     set -e
     mv VSCode-linux-x64 /opt/
     ln -sf /opt/VSCode-linux-x64/bin/code /usr/local/bin/

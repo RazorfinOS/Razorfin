@@ -9,7 +9,7 @@ chmod +x /tmp/rancher-desktop.AppImage
 
 /tmp/rancher-desktop.AppImage --appimage-extract
 
-run0 sh -c '
+sudo sh -c '
     set -e
     mkdir -p /opt/rancher-desktop
     mv /tmp/rancher-desktop.AppImage /opt/rancher-desktop/

@@ -2,7 +2,7 @@
 
 set -e
 
-run0 sh -c '
+sudo sh -c '
     set -e
     rm -rf /opt/VSCode-linux-x64
     rm /usr/local/bin/code
