@@ -2,7 +2,8 @@
 
 set -e
 
-curl -L -o /tmp/homebrew-install.sh https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+curl --retry 5 --retry-max-time 120 -L \
+    -o /tmp/homebrew-install.sh https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
 bash /tmp/homebrew-install.sh
 rm /tmp/homebrew-install.sh
 sed -i 's,# .bashrc,# .bashrc\nsource /usr/share/heliumos/feature/homebrew/env.sh # heliumos-homebrew DO NOT MODIFY\n,g' $HOME/.bashrc
