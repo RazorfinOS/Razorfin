@@ -2,7 +2,7 @@
 
 set -e
 
-curl --retry 5 --retry-max-time 120 -L
+curl --retry 5 --retry-max-time 120 -L \
     -o /tmp/vscode.tar.gz 'https://code.visualstudio.com/sha/download?build=stable&os=linux-x64'
 tar -xzf /tmp/vscode.tar.gz
 rm /tmp/vscode.tar.gz
