@@ -1,27 +1,36 @@
-#!/usr/bin/env sh
-
-
-set -e
-
-
-dnf remove -y \
-    kernel \
-    kernel-core \
-    kernel-modules-core \
-    kernel-modules
-
-
-rm -rdf /usr/lib/modules/*
-
+#!/usr/bin/env bash
 
 dnf install -y \
-    kernel-ml \
-    kernel-ml-core \
-    kernel-ml-modules \
-    kernel-ml-modules-extra
+    wget \
+    kernel-devel \
+    kernel-headers \
+    dkms \
+    vulkan \
+    vulkan-tools \
+    vulkan-headers \
+    vulkan-loader-devel
 
+touch \
+    /etc/modprobe.d/nouveau-blacklist.conf
 
-kver=$(cd /usr/lib/modules && echo * | awk '{print $1}')
+echo "blacklist nouveau" | tee \
+    /etc/modprobe.d/nouveau-blacklist.conf
 
+echo "options nouveau modeset=0" | tee -a \
+    /etc/modprobe.d/nouveau-blacklist.conf
 
-dracut -vf /usr/lib/modules/$kver/initramfs.img $kver
+dracut --force
+
+wget \
+    https://us.download.nvidia.com/XFree86/Linux-x86_64/550.144.03/NVIDIA-Linux-x86_64-550.144.03.run
+
+chmod +x \
+    NVIDIA-Linux-x86_64-550.144.03.run
+
+./NVIDIA-Linux-x86_64-550.144.03.run \
+    --silent --run-nvidia-xconfig --dkms \
+    --kernel-source-path /usr/src/kernels/$(ls /usr/src/kernels/ | awk '{print $1}') \
+    --kernel-module-build-directory=kernel-open/
+
+dracut --force
+
