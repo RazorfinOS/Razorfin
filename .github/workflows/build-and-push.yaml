@@ -9,12 +9,11 @@ on:
         type: boolean
 
 jobs:
-   build_and_push:
+  build_and_push:
     runs-on: ubuntu-24.04
     strategy:
       matrix:
         version: [10]
-        variant: ["", edge]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -29,28 +28,15 @@ jobs:
         env:
           REGISTRY_IMAGE: ${{ vars.registry_image }}
           VERSION: ${{ matrix.version }}
-          VARIANT: ${{ matrix.variant }}
         run: |
-          if [[ $VARIANT == "" ]]; then
-            export CONTAINERFILE=$VERSION/Containerfile
+          if [[ ${IS_CANARY} == true ]]; then
+            make image VERSION=${VERSION} VARIANT=canary
           else
-            export CONTAINERFILE=$VERSION/Containerfile.$VARIANT
+            make image VERSION=${VERSION}
           fi
-          podman build \
-            -t $REGISTRY_IMAGE \
-            -f $CONTAINERFILE . \
-            --label "containers.bootc=1" \
-            --label "io.artifacthub.package.readme-url=https://codeberg.org/HeliumOS/bootc/raw/branch/release/README.md" \
-            --label "org.opencontainers.image.created=$(date --rfc-3339=seconds)" \
-            --label "org.opencontainers.image.description=An atomic desktop operating system for your devices" \
-            --label "org.opencontainers.image.source=https://codeberg.org/HeliumOS/bootc" \
-            --label "org.opencontainers.image.vendor=HeliumOS" \
-            --label "io.artifacthub.package.license=GPL-2.0-only" \
-            --label "io.artifacthub.package.logo-url=https://codeberg.org/HeliumOS/logo/src/commit/0ce8b5cd8f6d311924d84c9a9f4961da95306171/export/logo/logo-color-256x256.png"
-            
+
       - name: Login to registry
         env:
-          REGISTRY_IMAGE: ${{ vars.registry_image }}
           REGISTRY_USER: ${{ secrets.registry_user }}
           REGISTRY_PASS: ${{ secrets.registry_pass }}
           REGISTRY: ${{ vars.registry }}
@@ -60,19 +46,11 @@ jobs:
       - name: Push to registry
         env:
           IS_CANARY: ${{ inputs.is_canary }}
-          REGISTRY_IMAGE: ${{ vars.registry_image }}
-          REGISTRY: ${{ vars.registry }}
           VERSION: ${{ matrix.version }}
-          VARIANT: ${{ matrix.variant }}
         run: |
-          if [[ $IS_CANARY = true ]]; then
-            export VERSION=$VERSION-canary
-          fi
-
-          if [[ $VARIANT == "" ]]; then
-            export TAG=$VERSION
+          if [[ ${IS_CANARY} == true ]]; then
+            make push VERSION=${VERSION} VARIANT=canary
           else
-            export TAG=$VERSION-$VARIANT
+            make push VERSION=${VERSION}
           fi
 
-          podman push $REGISTRY_IMAGE docker://$REGISTRY/$REGISTRY_IMAGE:$TAG
