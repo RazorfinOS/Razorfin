@@ -8,18 +8,28 @@ mkdir -p /etc/xdg && \
     touch /etc/xdg/system.kdeglobals
 
 
-sed -i 's,https://centos.org/,https://www.heliumos.org/,g' /usr/lib/os-release && \
-    sed -i 's,https://issues.redhat.com/,https://bugs.heliumos.org/,g' /usr/lib/os-release && \
-    sed -i 's,LOGO="fedora-logo-icon",LOGO="heliumos-logo-icon",g' /usr/lib/os-release && \
-    sed -i 's,10 (Coughlan),10,g' /usr/lib/os-release && \
-    sed -i 's,ID="centos",ID="heliumos",g' /usr/lib/os-release && \
-    sed -i 's,REDHAT_SUPPORT_PRODUCT="Red Hat Enterprise Linux 10",,g' /usr/lib/os-release && \
-    sed -i 's,REDHAT_SUPPORT_PRODUCT_VERSION="CentOS Stream",,g' /usr/lib/os-release && \
-    sed -i 's,CentOS Stream,HeliumOS,g' /usr/lib/os-release && \
-    sed -i 's,centos,heliumos,g' /usr/lib/os-release && \
-    sed -i 's,ID_LIKE="rhel fedora",ID_LIKE="rhel centos fedora",g' /usr/lib/os-release && \
-    sed -i 's,VENDOR_NAME="CentOS",VENDOR_NAME="HeliumOS",g' /usr/lib/os-release && \
-    sed -i 's,ANSI_COLOR="0;31",ANSI_COLOR="38;5;39",g' /usr/lib/os-release
+sed -i 's,AlmaLinux,HeliumOS,g' \
+    /usr/lib/os-release
+sed -i 's, (Purple Lion),,g' \
+    /usr/lib/os-release
+sed -i 's,ID="almalinux",ID="heliumos",g' \
+    /usr/lib/os-release
+sed -i 's,rhel,almalinux rhel,g' \
+    /usr/lib/os-release
+sed -i 's,10.0,10,g' \
+    /usr/lib/os-release
+sed -i 's,0;34,38;5;39,g' \
+    /usr/lib/os-release
+sed -i 's,cpe:/o:almalinux:almalinux:10::baseos,cpe:/o:heliumos:heliumos:10::baseos,g' \
+    /usr/lib/os-release
+sed -i 's,https://almalinux.org/,https://www.heliumos.org/,g' \
+    /usr/lib/os-release
+sed -i 's,https://wiki.almalinux.org/,https://www.heliumos.org/docs,g' \
+    /usr/lib/os-release
+sed -i 's,AlmaLinux,HeliumOS,g' \
+    /usr/lib/os-release
+sed -i 's,https://bugs.almalinux.org/,https://bugs.heliumos.org/,g' \
+    /usr/lib/os-release
 
 
 curl -o logo.tar.gz https://codeberg.org/HeliumOS/logo/archive/0ce8b5cd8f6d311924d84c9a9f4961da95306171.tar.gz && \

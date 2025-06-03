@@ -1,4 +1,4 @@
-FROM quay.io/centos-bootc/centos-bootc:stream10
+FROM quay.io/almalinuxorg/almalinux-bootc:10.0
 
 LABEL containers.bootc 1
 
