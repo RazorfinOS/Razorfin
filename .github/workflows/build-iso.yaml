@@ -1,0 +1,41 @@
+name: Build iso
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'HeliumOS version to build'
+        required: true
+        type: string
+        default: '10'
+      variant:
+        description: 'Variant (canary, stable)'
+        required: true
+        type: string
+        default: 'canary'
+      arch:
+        description: 'CPU Architecture'
+        required: true
+        type: string
+        default: 'x86_64'
+
+jobs:
+  build_iso:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            podman
+
+      - name: Build ISO
+        env:
+          VERSION: ${{ inputs.version }}
+          VARIANT: ${{ inputs.variant }}
+          ARCH: ${{ inputs.arch }}
+        run: |
+          make iso VERSION=${VERSION} VARIANT=${VARIANT} ARCH=${ARCH}
