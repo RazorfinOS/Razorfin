@@ -26,6 +26,7 @@ jobs:
 
       - name: Build image
         env:
+          IS_CANARY: ${{ inputs.is_canary }}
           REGISTRY_IMAGE: ${{ vars.registry_image }}
           VERSION: ${{ matrix.version }}
         run: |
