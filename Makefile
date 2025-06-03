@@ -1,6 +1,6 @@
 SUDO=sudo
 PODMAN = podman
-IMAGE = oci.heliumos.org/heliumos/bootc
+IMAGE = quay.io/heliumos/bootc
 VARIANT = canary
 VERSION = 10
 ARCH = x86_64
