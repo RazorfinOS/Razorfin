@@ -8,11 +8,6 @@ on:
         required: true
         type: string
         default: '10'
-      variant:
-        description: 'Variant (canary, stable)'
-        required: true
-        type: string
-        default: 'canary'
       arch:
         description: 'CPU Architecture'
         required: true
@@ -35,7 +30,7 @@ jobs:
       - name: Build ISO
         env:
           VERSION: ${{ inputs.version }}
-          VARIANT: ${{ inputs.variant }}
+          VARIANT: ${{ github.ref == 'refs/heads/dev' && 'canary' || 'stable' }}
           ARCH: ${{ inputs.arch }}
         run: |
           make iso VERSION=${VERSION} VARIANT=${VARIANT} ARCH=${ARCH}
