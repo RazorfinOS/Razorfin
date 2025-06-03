@@ -32,7 +32,7 @@ jobs:
           if [[ ${IS_CANARY} == true ]]; then
             make image VERSION=${VERSION} VARIANT=canary
           else
-            make image VERSION=${VERSION}
+            make image VERSION=${VERSION} VARIANT=stable
           fi
 
       - name: Login to registry
@@ -51,6 +51,6 @@ jobs:
           if [[ ${IS_CANARY} == true ]]; then
             make push VERSION=${VERSION} VARIANT=canary
           else
-            make push VERSION=${VERSION}
+            make push VERSION=${VERSION} VARIANT=stable
           fi
 
