@@ -4,10 +4,6 @@
 set -e
 
 
-mkdir -p /etc/xdg && \
-    touch /etc/xdg/system.kdeglobals
-
-
 sed -i 's,AlmaLinux,HeliumOS,g' \
     /usr/lib/os-release
 sed -i 's, (Purple Lion),,g' \
@@ -85,32 +81,17 @@ cat <<EOF >>/usr/share/wallpapers/Andromeda/metadata.json
 EOF
 
 
-mkdir -p /usr/share/wallpapers/LakeMartin/contents/images && \
-cp /workdir/wallpapers/lakemartin.jpg /usr/share/wallpapers/LakeMartin/contents/images/4231x2682.jpg && \
-cat <<EOF >>/usr/share/wallpapers/LakeMartin/metadata.json
-{
-    "KPlugin": {
-        "Authors": [
-            {
-                "Name": "HeliumOS"
-            }
-        ],
-        "Id": "LakeMartin",
-        "Name": "Lake Martin"
-    }
-}
-EOF
-
-
 declare -a lookandfeels=("org.kde.breeze.desktop" "org.kde.breezedark.desktop" "org.kde.breezetwilight.desktop")
 for lookandfeel in "${lookandfeels[@]}"
 do
    sed -i 's,Image=Next,Image=Andromeda,g' /usr/share/plasma/look-and-feel/${lookandfeel}/contents/defaults
 done
 
+sed -i \
+    's,#Current=01-breeze-fedora,Current=breeze,g' \
+    /etc/sddm.conf
 
-rm /etc/sddm.conf
-sed -i 's,/usr/share/wallpapers/Next/contents/images/5120x2880.png,/usr/share/wallpapers/HeliumOS-Andromeda/contents/andromeda.jpg,g' /usr/share/sddm/themes/breeze/theme.conf
+sed -i 's,/usr/share/wallpapers/Next/contents/images/5120x2880.png,/usr/share/wallpapers/Andromeda/contents/images/5338x5905.jpg,g' /usr/share/sddm/themes/breeze/theme.conf
 
 
 ln -s /usr/share/wallpapers/Andromeda/contents/images/5338x5905.jpg /usr/share/backgrounds/default.png
