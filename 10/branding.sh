@@ -96,6 +96,8 @@ sed -i 's,/usr/share/wallpapers/Next/contents/images/5120x2880.png,/usr/share/wa
 
 ln -s /usr/share/wallpapers/Andromeda/contents/images/5338x5905.jpg /usr/share/backgrounds/default.png
 
+dnf remove -y \
+    console-login-helper-messages
 
 dnf install -y plymouth-theme-spinner
 
