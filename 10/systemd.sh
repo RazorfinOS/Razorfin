@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 
-set -e
+set -xeuo pipefail
 
 systemctl disable \
     atd.service

@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 
-set -e
+set -xeuo pipefail
 
 
 kver=$(cd /usr/lib/modules && echo * | awk '{print $1}')

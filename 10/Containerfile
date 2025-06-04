@@ -8,7 +8,6 @@ COPY 10/system_root system_root
 COPY 10/files.sh files.sh
 RUN ./files.sh && rm files.sh
 
-COPY 10/flatpak-readonlyroot.toml flatpak.toml
 COPY 10/flatpak.sh flatpak.sh
 RUN ./flatpak.sh && rm flatpak.sh
 

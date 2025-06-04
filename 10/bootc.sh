@@ -1,21 +1,29 @@
 #!/usr/bin/env sh
 
 
-set -e
+set -xeuo pipefail
 
 
-dnf install -y selinux-policy
+dnf install -y \
+    selinux-policy
 
 
-sed -i 's,ExecStart=/usr/bin/bootc update --apply --quiet,ExecStart=/usr/bin/bootc update --quiet,g' \
+sed -i \
+    's,ExecStart=/usr/bin/bootc update --apply --quiet,ExecStart=/usr/bin/bootc update --quiet,g' \
     /usr/lib/systemd/system/bootc-fetch-apply-updates.service
 
 
-mv /opt /var/opt && \
-  ln -s /var/opt /opt
+mv \
+    /opt \
+    /var/opt
+ln -s \
+    /var/opt \
+    /opt
 
 
-mv /usr/local /var/usrlocal && \
-  ln -s /var/usrlocal /usr/local
-
-rm /etc/profile.d/70-systemd-shell-extra.sh
+mv \
+    /usr/local \
+    /var/usrlocal
+ln -s \
+    /var/usrlocal \
+    /usr/local

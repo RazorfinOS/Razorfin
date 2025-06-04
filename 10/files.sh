@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-set -e
+set -xeuo pipefail
 
-cp -rf system_root/* /
+cp -rf \
+    system_root/* \
+    /
 

@@ -1,21 +1,16 @@
 #!/usr/bin/env sh
 
 
-set -e
+set -xeuo pipefail
 
 
 dnf install -y \
-  flatpak
-#    flatpak-builder
+    flatpak
 
 
-mkdir -p /var/roothome
+mkdir -p \
+    /etc/flatpak/remotes.d
 
-
-#curl -O https://codeberg.org/HeliumOS/flatpak-readonlyroot/raw/tag/v0.2/flatpak-readonlyroot.py
-
-
-#python3 flatpak-readonlyroot.py --name=heliumos flatpak.toml
-
-
-rm -rdf /var/roothome
+curl \
+    -o /etc/flatpak/remotes.d/flathub.flatpakrepo \
+    https://dl.flathub.org/repo/flathub.flatpakrepo

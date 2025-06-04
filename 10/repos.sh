@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 
-set -e
+set -xeuo pipefail
 
 
 dnf install -y \
@@ -14,8 +14,3 @@ dnf config-manager --set-enabled \
 
 dnf config-manager --save \
     --setopt=exclude=PackageKit,PackageKit-command-not-found,rootfiles,firefox
-
-
-mkdir -p /etc/flatpak/remotes.d && \
-    curl -o /etc/flatpak/remotes.d/flathub.flatpakrepo  https://dl.flathub.org/repo/flathub.flatpakrepo
-
