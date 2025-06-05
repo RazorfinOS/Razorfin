@@ -5,11 +5,8 @@ set -xeuo pipefail
 
 
 dnf install -y \
-    epel-release
-
-
-dnf config-manager --set-enabled \
-    crb
+    epel-release \
+    almalinux-release-nvidia-driver
 
 
 dnf config-manager --save \

@@ -4,6 +4,10 @@
 set -xeuo pipefail
 
 
+dnf install -y \
+    nvidia-open-kmod
+
+
 kver=$(cd /usr/lib/modules && echo * | awk '{print $1}')
 
 
