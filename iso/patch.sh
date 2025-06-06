@@ -7,6 +7,9 @@ dnf install -y \
 dnf install -y \
 	lorax
 
+rm -rf \
+	/out/*
+
 curl \
 	--retry 3 \
 	-o out/upstream.iso \
@@ -19,14 +22,9 @@ sed -i \
     "s,<URL>,${IMAGE}:${TAG},g" \
     /out/heliumos.ks
 
-
-rm -rf \
-	/out/images
 mkdir -p \
 	/out/images
 
-rm -rf \
-	/out/product
 cp -r \
 	/iso/product \
 	/out/product
@@ -48,8 +46,6 @@ fi
 find . | cpio -c -o | gzip -9cv > \
 	/out/images/product.img
 
-rm -rf \
-	/out/iso
 cp -r \
 	/iso/EFI \
 	/out/EFI
@@ -57,12 +53,16 @@ sed -i \
     "s,<VERSION>,${VERSION},g" \
     /out/EFI/BOOT/grub.cfg
 
+mkdir /out/boot
+cp -r \
+	/out/EFI/BOOT \
+	/out/boot/grub2
+
 cd /out
-rm -f \
-    /out/HeliumOS-${VERSION}-${ARCH}-boot.iso
 mkksiso \
 	-a images \
 	-a EFI \
+	-a boot \
 	-V heliumos-${VERSION}-boot \
 	--replace "HeliumOS ${VERSION}" \
     --ks /out/heliumos.ks \
