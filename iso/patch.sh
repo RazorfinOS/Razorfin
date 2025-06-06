@@ -46,25 +46,13 @@ fi
 find . | cpio -c -o | gzip -9cv > \
 	/out/images/product.img
 
-cp -r \
-	/iso/EFI \
-	/out/EFI
-sed -i \
-    "s,<VERSION>,${VERSION},g" \
-    /out/EFI/BOOT/grub.cfg
-
-mkdir /out/boot
-cp -r \
-	/out/EFI/BOOT \
-	/out/boot/grub2
 
 cd /out
 mkksiso \
 	-a images \
-	-a EFI \
-	-a boot \
 	-V heliumos-${VERSION}-boot \
-	--replace "HeliumOS ${VERSION}" \
+	--replace "timeout=60" "timeout=0" \
+	--replace "nstall AlmaLinux" "nstall HeliumOS" \
     --ks /out/heliumos.ks \
 	/out/upstream.iso \
 	/out/HeliumOS-${VERSION}-${ARCH}-boot.iso
