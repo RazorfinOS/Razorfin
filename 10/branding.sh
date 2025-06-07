@@ -61,6 +61,9 @@ ln -sf \
     /usr/share/icons/hicolor/256x256/apps/heliumos-logo-icon.png \
     /usr/share/pixmaps/fedora-logo.png
 ln -sf \
+    /usr/share/icons/hicolor/256x256/apps/heliumos-logo-icon.png \
+    /usr/share/pixmaps/system-logo-white.png
+ln -sf \
     /usr/share/icons/hicolor/64x64/apps/heliumos-logo-icon.png \
     /usr/share/pixmaps/fedora-gdm-logo.png
 ln -sf \
