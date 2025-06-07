@@ -11,29 +11,11 @@
 Building version 10
 
 ```bash
-podman build -t localhost/heliumos-bootc:10 -f 10/Containerfile .
+make VARIANT=stable
 ```
 
-Building version 10-edge
+Building version 10-canary
 
 ```bash
-podman build -t localhost/heliumos-bootc:10-edge -f 10/Containerfile.edge .
-```
-
-Building version 9
-
-```bash
-podman build -t localhost/heliumos-bootc:9 -f 9/Containerfile .
-```
-
-Building version 9-edge
-
-```bash
-podman build -t localhost/heliumos-bootc:9-edge -f 9/Containerfile.edge .
-```
-
-Building version 9-nvidia
-
-```bash
-podman build -t localhost/heliumos-bootc:9-nvidia -f 9/Containerfile.nvidia .
+make VARIANT=canary
 ```
