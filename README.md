@@ -19,3 +19,5 @@ Building version 10-canary
 ```bash
 make VARIANT=canary
 ```
+
+These sources are free and open source software under the GPLv2 license.
