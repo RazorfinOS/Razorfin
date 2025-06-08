@@ -1,8 +1,0 @@
-[Main]
-Product=HeliumOS
-Version=<VERSION>
-BugURL=https://bugs.heliumos.org/
-IsFinal=<IS_FINAL>
-UUID=201707110057.x86_64
-[Compose]
-Lorax=19.6.92-1

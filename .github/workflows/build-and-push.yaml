@@ -25,6 +25,7 @@ jobs:
             podman
 
       - name: Build image
+        id: build
         env:
           IS_CANARY: ${{ inputs.is_canary }}
           REGISTRY_IMAGE: ${{ vars.registry_image }}
@@ -32,9 +33,27 @@ jobs:
         run: |
           if [[ ${IS_CANARY} == true ]]; then
             make image VERSION=${VERSION} VARIANT=canary
+            export TAG=$(make echo-tag VERSION=${VERSION} VARIANT=canary)
           else
             make image VERSION=${VERSION} VARIANT=stable
+            export TAG=$(make echo-tag VERSION=${VERSION} VARIANT=stable)
           fi
+          
+          export IMAGE=$(make echo-image)
+
+          echo "TAG=${TAG}" >> $GITHUB_OUTPUT
+          echo "IMAGE=${IMAGE}" >> $GITHUB_OUTPUT
+      
+      - name: Run Rechunker
+        id: rechunk
+        uses: hhd-dev/rechunk@ca77507401f8700bb0b25ebecbbf980a078cd180 # v1.2.2
+        with:
+          rechunk: "ghcr.io/hhd-dev/rechunk:v1.2.2"
+          ref: ${{ steps.build.outputs.IMAGE }}:${{ steps.build.outputs.TAG }}
+          skip_compression: true
+          version: ${{ steps.build.outputs.TAG }}
+          pretty: ${{ steps.build.outputs.TAG }}
+          revision: ${{ github.sha }}
 
       - name: Login to registry
         env:
@@ -42,13 +61,17 @@ jobs:
           REGISTRY_PASS: ${{ secrets.registry_pass }}
           REGISTRY: ${{ vars.registry }}
         run: |
-          podman login --username $REGISTRY_USER --password $REGISTRY_PASS $REGISTRY
+          sudo podman login --username $REGISTRY_USER --password $REGISTRY_PASS $REGISTRY
 
       - name: Push to registry
         env:
           IS_CANARY: ${{ inputs.is_canary }}
           VERSION: ${{ matrix.version }}
         run: |
+          RECHUNKED_IMAGE=$(sudo podman pull ${{ steps.rechunk.outputs.ref }})
+
+          sudo podman image tag ${RECHUNKED_IMAGE} ${{ steps.build.outputs.IMAGE }}:${{ steps.build.outputs.TAG }}
+
           if [[ ${IS_CANARY} == true ]]; then
             make push VERSION=${VERSION} VARIANT=canary
           else

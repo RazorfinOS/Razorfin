@@ -1,5 +1,5 @@
 SUDO=sudo
-PODMAN = podman
+PODMAN = $(SUDO) podman
 IMAGE = quay.io/heliumos/bootc
 VARIANT = canary
 VERSION = 10
@@ -11,7 +11,13 @@ else
 	TAG = $(VERSION)
 endif
 
-.PHONY: image push iso
+.PHONY: echo-image echo-tag image push iso
+
+echo-image:
+	@echo $(IMAGE)
+
+echo-tag:
+	@echo $(TAG)
 
 image:
 	$(PODMAN) build \
@@ -19,23 +25,64 @@ image:
 		-t $(IMAGE):$(TAG) \
 		.
 
+rechunk:
+	$(PODMAN) run \
+		--rm \
+		--privileged \
+		-v /var/lib/containers:/var/lib/containers \
+		quay.io/centos-bootc/centos-bootc:stream10 \
+		/usr/libexec/bootc-base-imagectl rechunk \
+			$(IMAGE):$(TAG) \
+			$(IMAGE):$(TAG)
+
 push:
 	$(PODMAN) push \
 		$(IMAGE):$(TAG)
 
 iso:
-	mkdir -p out
-	
-	$(SUDO) $(PODMAN) run \
-		--privileged \
+	rm -rf ./out
+	mkdir ./out
+
+	cp \
+		./iso/config.toml \
+		./out/config.toml
+	sed -i \
+    "s,<URL>,$(IMAGE):$(TAG),g" \
+    ./out/config.toml
+
+	$(PODMAN) pull \
+		$(IMAGE):$(TAG)
+
+	$(PODMAN) run \
 		--rm \
 		-it \
-		-v ./out:/out:z \
-		-v ./iso:/iso:z \
-		-e IMAGE=$(IMAGE) \
-		-e VARIANT=$(VARIANT) \
-		-e VERSION=$(VERSION) \
-		-e ARCH=$(ARCH) \
-		-e TAG=$(TAG) \
+		--privileged \
+		--pull=newer \
+		--security-opt label=type:unconfined_t \
+		-v ./out/config.toml:/config.toml:ro \
+		-v ./out:/output \
+		-v /var/lib/containers/storage:/var/lib/containers/storage \
+		quay.io/centos-bootc/bootc-image-builder:latest \
+		--type anaconda-iso \
+		--use-librepo=False \
+		$(IMAGE):$(TAG)
+
+	$(PODMAN) run \
+		--rm \
+		-it \
+		--pull=newer \
+		--privileged \
+		-v ./out:/output \
+		-v ./iso:/iso \
 		quay.io/almalinuxorg/almalinux:10 \
-		/iso/patch.sh
+		bash -c '\
+			dnf install -y https://build.almalinux.org/pulp/content/builds/AlmaLinux-10-x86_64-36278-br/Packages/l/lorax-40.5.12-1.el10.alma.1.x86_64.rpm \
+		&& rm -rf /images && mkdir /images \
+		&& rm -f /output/HeliumOS-${VERSION}-${ARCH}-boot.iso \
+		&& cd /iso/product && find . | cpio -c -o | gzip -9cv > /images/product.img && cd / \
+		&& mkksiso \
+			--add /images \
+			--volid heliumos-${VERSION}-boot \
+			--replace "vmlinuz" "vmlinuz inst.resolution=1280x800" \
+			/output/bootiso/install.iso \
+			/output/HeliumOS-${VERSION}-${ARCH}-boot.iso'
