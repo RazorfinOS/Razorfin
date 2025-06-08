@@ -8,3 +8,12 @@ systemctl disable \
 
 systemctl disable \
     rpm-ostree-countme.service
+
+systemctl mask \
+    hibernate.target
+
+systemctl mask \
+    hybrid-sleep.target
+
+systemctl mask \
+    suspend-then-hibernate.target
