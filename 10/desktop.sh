@@ -5,7 +5,14 @@ set -xeuo pipefail
 
 
 dnf install -y \
-	@"KDE Plasma Workspaces"
+	@"KDE Plasma Workspaces" \
+    angelfish \
+    kcalc \
+    kmines \
+    kolourpaint \
+    krdp \
+    kreversi \
+    okular 
 
 
 dnf remove -y \
