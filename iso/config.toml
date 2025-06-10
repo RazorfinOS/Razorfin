@@ -1,7 +1,14 @@
 [customizations.installer.kickstart]
 contents = """
+
+autopart --type 'btrfs' --nohome
+rootpw --lock
+
 %post
+
 bootc switch --mutate-in-place --transport registry <URL>
+rm -f /var/lib/systemd/random-seed
+
 %end
 """
 
