@@ -32,8 +32,8 @@ RUN ./systemd.sh && rm systemd.sh
 COPY 10/bootc.sh bootc.sh
 RUN ./bootc.sh && rm bootc.sh
 
-COPY 10/kernel.sh kernel.sh
-RUN ./kernel.sh && rm kernel.sh
+COPY 10/hardware.sh hardware.sh
+RUN ./hardware.sh && rm hardware.sh
 
 RUN rm -rdf /workdir
 
