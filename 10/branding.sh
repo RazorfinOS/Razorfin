@@ -6,7 +6,11 @@ set -xeuo pipefail
 
 sed -i 's,AlmaLinux,HeliumOS,g' \
     /usr/lib/os-release
+sed -i 's, Kitten,,g' \
+    /usr/lib/os-release
 sed -i 's, (Purple Lion),,g' \
+    /usr/lib/os-release
+sed -i 's, (Lion Cub),,g' \
     /usr/lib/os-release
 sed -i 's,ID="almalinux",ID="heliumos",g' \
     /usr/lib/os-release
