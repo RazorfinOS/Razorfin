@@ -10,6 +10,8 @@ dnf install -y \
     kcalc \
     kmines \
     kolourpaint \
+    ksnakeduel \
+    ksudoku \
     krdp \
     kreversi \
     okular 
