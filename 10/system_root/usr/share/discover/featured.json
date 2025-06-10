@@ -1,7 +1,7 @@
 [
     "appstream://com.brave.Browser",
     "appstream://com.google.Chrome",
-    "appstream://org.kde.kolourpaint.desktop",
+    "appstream://org.kde.kpat",
     "appstream://com.valvesoftware.Steam",
     "appstream://com.discordapp.Discord",
     "appstream://org.onlyoffice.desktopeditors"
