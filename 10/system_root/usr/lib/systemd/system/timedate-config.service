@@ -1,0 +1,7 @@
+[Unit]
+Description=HeliumOS timedate configuration service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/timedatectl set-local-rtc 0
+ExecStart=/usr/bin/timedatectl set-ntp 1

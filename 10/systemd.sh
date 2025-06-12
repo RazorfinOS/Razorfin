@@ -17,3 +17,6 @@ systemctl mask \
 
 systemctl mask \
     suspend-then-hibernate.target
+
+systemctl enable \
+    timedate-config.service
