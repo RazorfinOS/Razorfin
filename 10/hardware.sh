@@ -6,7 +6,7 @@ echo "UTC" >> /etc/adjtime
 
 LIST=$(ls /usr/lib/systemd/ntp-units.d/ | awk '{print $1}' | head -n 1)
 systemctl enable \
-    echo $(echo $(cat /usr/lib/systemd/ntp-units.d/${LIST}) | awk '{print $1}' | head -n 1)
+    $(echo $(cat /usr/lib/systemd/ntp-units.d/${LIST}) | awk '{print $1}' | head -n 1)
 
 # steam-devices
 
