@@ -2,6 +2,12 @@
 
 set -xeuo pipefail
 
+echo "UTC" >> /etc/adjtime
+
+LIST=$(ls /usr/lib/systemd/ntp-units.d/ | awk '{print $1}' | head -n 1)
+SERVICE=$(cat /usr/lib/systemd/ntp-units.d/${LIST}) | awk '{print $1}' | head -n 1
+systemctl enable ${SERVICE}
+
 # steam-devices
 
 dnf install -y \
