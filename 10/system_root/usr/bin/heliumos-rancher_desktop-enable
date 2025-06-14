@@ -1,26 +1,38 @@
 #!/usr/bin/env bash
 
-set -e
+set -xeuo pipefail
 
-curl --retry 5 --retry-max-time 120 -L \
+rm -f \
+    /tmp/rancher-desktop.AppImage
+curl \
+    -L \
+    --retry 5 \
+    --retry-max-time 120 \
     -o /tmp/rancher-desktop.AppImage https://slc-mirror.opensuse.org/repositories/isv%3A/Rancher%3A/stable/AppImage/rancher-desktop-latest-x86_64.AppImage
-chmod +x /tmp/rancher-desktop.AppImage
+chmod +x \
+    /tmp/rancher-desktop.AppImage
 
 
-/tmp/rancher-desktop.AppImage --appimage-extract
+rm -rf \
+    squashfs-root
+/tmp/rancher-desktop.AppImage \
+    --appimage-extract
 
-sudo sh -c '
-    set -e
+sudo bash -c '
+    set -xeuo pipefail
+    rm -rf /opt/rancher-desktop
     mkdir -p /opt/rancher-desktop
     mv /tmp/rancher-desktop.AppImage /opt/rancher-desktop/
     cp squashfs-root/rancher-desktop.desktop /opt/rancher-desktop/
     cp squashfs-root/rancher-desktop.png /opt/rancher-desktop
     sed -i 's,Icon=rancher-desktop,Icon=/opt/rancher-desktop/rancher-desktop.png,g' /opt/rancher-desktop/rancher-desktop.desktop
     ln -sf /opt/rancher-desktop/rancher-desktop.AppImage /usr/local/bin/rancher-desktop
+    mkdir -p /usr/local/share/applications/
     ln -sf /opt/rancher-desktop/rancher-desktop.desktop /usr/local/share/applications/
-' || rm -rf squashfs-root
+'
 
-rm -rf squashfs-root
+rm -rf \
+    squashfs-root
 
 echo "****************************************"
 echo "--Complete--"

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-set -e
+set -xeuo pipefail
 
-sudo sh -c '
-    set -e
+sudo bash -c '
+    set -xeuo pipefail
     rm -rf /opt/rancher-desktop
     rm -f /usr/local/bin/rancher-desktop
     rm -f /usr/local/share/applications/rancher-desktop.desktop

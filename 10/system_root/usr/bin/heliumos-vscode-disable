@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-set -e
+set -xeuo pipefail
 
-sudo sh -c '
-    set -e
+sudo bash -c '
+    set -xeuo pipefail
     rm -rf /opt/VSCode-linux-x64
     rm /usr/local/bin/code
     rm /usr/local/share/applications/vscode.desktop

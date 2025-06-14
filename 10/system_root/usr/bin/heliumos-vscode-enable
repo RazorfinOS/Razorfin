@@ -1,16 +1,24 @@
 #!/usr/bin/env bash
 
-set -e
+set -xeuo pipefail
 
-curl --retry 5 --retry-max-time 120 -L \
-    -o /tmp/vscode.tar.gz 'https://code.visualstudio.com/sha/download?build=stable&os=linux-x64'
-tar -xzf /tmp/vscode.tar.gz
-rm /tmp/vscode.tar.gz
+curl \
+    -L \
+    --retry 5 \
+    --retry-max-time 120 \
+    -o /tmp/vscode.tar.gz \
+    'https://code.visualstudio.com/sha/download?build=stable&os=linux-x64'
+tar -xzf \
+    /tmp/vscode.tar.gz
+rm -f \
+    /tmp/vscode.tar.gz
 
-sudo sh -c '
-    set -e
+sudo bash -c '
+    set -xeuo pipefail
+    rm -rf /opt/VSCode-linux-x64
     mv VSCode-linux-x64 /opt/
     ln -sf /opt/VSCode-linux-x64/bin/code /usr/local/bin/
+    mkdir -p /usr/local/share/applications/
     ln -sf /usr/share/heliumos/feature/vscode/vscode.desktop /usr/local/share/applications/
 '
 

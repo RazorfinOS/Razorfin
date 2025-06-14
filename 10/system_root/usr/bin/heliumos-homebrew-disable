@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
-set -e
+set -xeuo pipefail
 
-sudo rm -rf /home/linuxbrew
-sed -i '/heliumos-homebrew/d' $HOME/.bashrc
+sudo rm -rf \
+    /home/linuxbrew
+rm -f \
+    ~/.bashrc.d/brewrc
 
 echo "****************************************"
 echo "--Complete--"
