@@ -1,4 +1,4 @@
-FROM quay.io/almalinuxorg/almalinux-bootc:10.0
+FROM quay.io/almalinuxorg/almalinux-bootc:10-kitten
 
 LABEL containers.bootc 1
 

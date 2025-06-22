@@ -40,7 +40,7 @@ push:
 		$(IMAGE):$(TAG)
 
 iso:
-	rm -rf ./out
+	$(SUDO) rm -rf ./out
 	mkdir ./out
 
 	cp \
