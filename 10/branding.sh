@@ -24,7 +24,10 @@ sed -i 's,AlmaLinux,HeliumOS,g' \
     /usr/lib/os-release
 sed -i 's,https://bugs.almalinux.org/,https://bugs.heliumos.org/,g' \
     /usr/lib/os-release
-
+sed -i 's, Kitten,,g' \
+    /usr/lib/os-release
+sed -i 's, (Lion Cub),,g' \
+    /usr/lib/os-release
 
 curl \
     -o logo.tar.gz \
@@ -100,7 +103,7 @@ mkdir -p \
 cp \
     /workdir/wallpapers/andromeda.jpg \
     /usr/share/wallpapers/Andromeda/contents/images/5338x5905.jpg
-    
+
 cat <<EOF >>/usr/share/wallpapers/Andromeda/metadata.json
 {
     "KPlugin": {
@@ -157,4 +160,3 @@ distribution come with their own licences. A copy of the GPLv2 license
 is included with the distribution media.
 EOF
 ln -sf /usr/share/heliumos-release/EULA /usr/share/redhat-release/EULA
-
