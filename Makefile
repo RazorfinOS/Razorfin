@@ -74,9 +74,9 @@ iso:
 		--privileged \
 		-v ./out:/output \
 		-v ./iso:/iso \
-		quay.io/almalinuxorg/almalinux:10 \
+		quay.io/almalinuxorg/almalinux:10-kitten \
 		bash -c '\
-			dnf install -y https://build.almalinux.org/pulp/content/builds/AlmaLinux-10-x86_64-36278-br/Packages/l/lorax-40.5.12-1.el10.alma.1.x86_64.rpm \
+			dnf install -y lorax \
 		&& rm -rf /images && mkdir /images \
 		&& rm -f /output/HeliumOS-${VERSION}-${ARCH}-boot.iso \
 		&& cd /iso/product && find . | cpio -c -o | gzip -9cv > /images/product.img && cd / \
