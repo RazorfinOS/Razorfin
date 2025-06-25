@@ -1,7 +1,7 @@
 [customizations.installer.kickstart]
 contents = """
 
-autopart --type=plain --fstype=ext4 --nohome
+autopart --type=plain --fstype=btrfs --nohome
 rootpw --lock
 
 %post
@@ -14,14 +14,14 @@ rm -f /var/lib/systemd/random-seed
 
 [customizations.installer.modules]
 enable = [
-  "org.fedoraproject.Anaconda.Modules.Localization",
-  "org.fedoraproject.Anaconda.Modules.Storage",
-  "org.fedoraproject.Anaconda.Modules.Timezone",
-  "org.fedoraproject.Anaconda.Modules.Users"
+    "org.fedoraproject.Anaconda.Modules.Localization",
+    "org.fedoraproject.Anaconda.Modules.Storage",
+    "org.fedoraproject.Anaconda.Modules.Timezone",
+    "org.fedoraproject.Anaconda.Modules.Users",
 ]
 disable = [
-  "org.fedoraproject.Anaconda.Modules.Network",
-  "org.fedoraproject.Anaconda.Modules.Security",
-  "org.fedoraproject.Anaconda.Modules.Services",
-  "org.fedoraproject.Anaconda.Modules.Subscription"
+    "org.fedoraproject.Anaconda.Modules.Network",
+    "org.fedoraproject.Anaconda.Modules.Security",
+    "org.fedoraproject.Anaconda.Modules.Services",
+    "org.fedoraproject.Anaconda.Modules.Subscription",
 ]
