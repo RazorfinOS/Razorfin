@@ -1,7 +1,7 @@
 [customizations.installer.kickstart]
 contents = """
 
-autopart --type=plain --fstype=btrfs --nohome
+autopart --type=btrfs --nohome
 rootpw --lock
 
 %post
