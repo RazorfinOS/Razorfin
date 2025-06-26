@@ -3,6 +3,5 @@
 set -xeuo pipefail
 
 cp -rf \
-    system_root/* \
+    /workdir/system_root/* \
     /
-

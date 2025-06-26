@@ -4,37 +4,21 @@ LABEL containers.bootc 1
 
 WORKDIR /workdir
 
-COPY 10/system_root system_root
-COPY 10/files.sh files.sh
-RUN ./files.sh && rm files.sh
+COPY 10/system_root ./system_root
+COPY 10/*.sh .
+COPY 10/*.yaml .
 
-COPY 10/flatpak.sh flatpak.sh
-RUN ./flatpak.sh && rm flatpak.sh
+RUN <<EOF bash
+    set -xeuo pipefail
 
-COPY 10/repos.sh repos.sh
-RUN ./repos.sh && rm repos.sh
+    dnf install -y ansible-core
+    ansible-playbook playbook.yaml
+EOF
 
-COPY 10/desktop.sh desktop.sh
-RUN ./desktop.sh && rm desktop.sh
+RUN <<EOF bash
+    set -xeuo pipefail
 
-COPY 10/firewall.sh firewall.sh
-RUN ./firewall.sh && rm firewall.sh
-
-COPY 10/apps.sh apps.sh
-RUN ./apps.sh && rm apps.sh
-
-COPY 10/branding.sh branding.sh
-RUN ./branding.sh && rm branding.sh
-
-COPY 10/systemd.sh systemd.sh
-RUN ./systemd.sh && rm systemd.sh
-
-COPY 10/bootc.sh bootc.sh
-RUN ./bootc.sh && rm bootc.sh
-
-COPY 10/hardware.sh hardware.sh
-RUN ./hardware.sh && rm hardware.sh
-
-RUN rm -rdf /workdir
-
-RUN bootc container lint
+    rm -rdf /workdir
+    dnf remove -y ansible-core
+    bootc container lint
+EOF

@@ -1,0 +1,23 @@
+- name: HeliumOS
+  hosts: localhost
+  tasks:
+    - name: Files
+      ansible.builtin.script: /workdir/files.sh
+    - name: Repos
+      ansible.builtin.script: /workdir/repos.sh
+    - name: Apps
+      ansible.builtin.script: /workdir/apps.sh
+    - name: Bootc
+      ansible.builtin.script: /workdir/bootc.sh
+    - name: Desktop
+      ansible.builtin.script: /workdir/desktop.sh
+    - name: Firewall
+      ansible.builtin.script: /workdir/firewall.sh
+    - name: Flatpak
+      ansible.builtin.script: /workdir/flatpak.sh
+    - name: Hardware
+      ansible.builtin.script: /workdir/hardware.sh
+    - name: Systemd
+      ansible.builtin.script: /workdir/systemd.sh
+    - name: Branding
+      ansible.builtin.script: /workdir/branding.sh
