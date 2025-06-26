@@ -8,17 +8,10 @@ COPY 10/system_root ./system_root
 COPY 10/*.sh .
 COPY 10/*.yaml .
 
-RUN <<EOF bash
-    set -xeuo pipefail
+RUN dnf install -y ansible-core
+RUN ansible-playbook playbook.yaml
 
-    dnf install -y ansible-core
-    ansible-playbook playbook.yaml
-EOF
+RUN rm -rdf /workdir
+RUN dnf remove -y ansible-core
 
-RUN <<EOF bash
-    set -xeuo pipefail
-
-    rm -rdf /workdir
-    dnf remove -y ansible-core
-    bootc container lint
-EOF
+RUN bootc container lint
