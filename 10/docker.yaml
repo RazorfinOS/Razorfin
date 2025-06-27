@@ -8,3 +8,4 @@
       - https://download.docker.com/linux/rhel/9/x86_64/stable/Packages/docker-ce-rootless-extras-28.3.0-1.el9.x86_64.rpm
       - https://download.docker.com/linux/rhel/9/x86_64/stable/Packages/docker-compose-plugin-2.37.3-1.el9.x86_64.rpm
     state: present
+    disable_gpg_check: true
