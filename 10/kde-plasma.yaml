@@ -23,7 +23,12 @@
     name:
       - krfb
 
-- name: Configure systemd Services for KDE
+- name: Enable SDDM service
   ansible.builtin.systemd_service:
     name: sddm
     enabled: true
+
+- name: Disable Cockpit service
+  ansible.builtin.systemd_service:
+    name: cockpit
+    enabled: false
