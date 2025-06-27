@@ -1,0 +1,24 @@
+- name: Install SELinux Policy
+  ansible.builtin.dnf:
+    name:
+      - selinux-policy
+    state: present
+
+- name: Patch Bootc update service to remove apply
+  shell:
+    cmd: |
+      sed -i \
+      's,ExecStart=/usr/bin/bootc update --apply --quiet,ExecStart=/usr/bin/bootc update --quiet,g' \
+      /usr/lib/systemd/system/bootc-fetch-apply-updates.service
+
+- name: Set /opt mutable
+  shell:
+    cmd: |
+      mv /opt /var/opt
+      ln -s /var/opt /opt
+
+- name: Set /usr/local mutable
+  shell:
+    cmd: |
+      mv /usr/local /var/usrlocal
+      ln -s /var/usrlocal /usr/local

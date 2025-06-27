@@ -1,14 +1,14 @@
 - name: HeliumOS
   hosts: localhost
   tasks:
-    - name: Files
-      ansible.builtin.script: /workdir/files.sh
-    - name: Repos
-      ansible.builtin.script: /workdir/repos.sh
-    - name: Apps
-      ansible.builtin.script: /workdir/apps.sh
-    - name: Bootc
-      ansible.builtin.script: /workdir/bootc.sh
+    - name: DNF Configuration
+      ansible.builtin.include_tasks: dnf-config.yaml
+    - name: AppImage Compatibility
+      ansible.builtin.include_tasks: appimage-compat.yaml
+    - name: Development Tools
+      ansible.builtin.include_tasks: dev-tools.yaml
+    - name: Bootc Tweaks
+      ansible.builtin.include_tasks: bootc-tweaks.yaml
     - name: Desktop
       ansible.builtin.script: /workdir/desktop.sh
     - name: Firewall

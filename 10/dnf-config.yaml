@@ -1,0 +1,12 @@
+- name: Install dnf repos for EPEL, NVIDIA
+  ansible.builtin.dnf:
+    name:
+      - epel-release
+      - almalinux-release-nvidia-driver
+    state: present
+
+- name: Exclude unwanted packages
+  shell:
+    cmd: |
+      dnf config-manager --save \
+        --setopt=exclude=PackageKit,PackageKit-command-not-found,rootfiles,firefox

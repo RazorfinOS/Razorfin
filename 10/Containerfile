@@ -2,13 +2,15 @@ FROM quay.io/almalinuxorg/almalinux-bootc:10-kitten
 
 LABEL containers.bootc 1
 
+RUN dnf install -y ansible-core
+
 WORKDIR /workdir
 
 COPY 10/system_root ./system_root
 COPY 10/*.sh .
 COPY 10/*.yaml .
+RUN cp -rf /workdir/system_root/* /
 
-RUN dnf install -y ansible-core
 RUN ansible-playbook playbook.yaml
 
 RUN rm -rdf /workdir

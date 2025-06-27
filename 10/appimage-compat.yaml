@@ -1,0 +1,5 @@
+- name: Install FUSE
+  ansible.builtin.dnf:
+    name:
+      - fuse
+    state: present
