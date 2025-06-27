@@ -1,0 +1,12 @@
+- name: Install Firewall Config App
+  ansible.builtin.dnf:
+    name:
+      - firewall-config
+    state: present
+
+- name: Set Firewall Default Zone
+  shell:
+    cmd: |
+      sed -i \
+        's,DefaultZone=public,DefaultZone=HeliumOS,g' \
+        /etc/firewalld/firewalld.conf

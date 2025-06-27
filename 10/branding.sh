@@ -3,6 +3,12 @@
 
 set -xeuo pipefail
 
+rm -rf \
+    /usr/share/plasma/look-and-feel/org.fedoraproject.fedora.desktop
+rm -rf \
+    /usr/share/wallpapers/fedora
+rm -rf \
+    /usr/share/backgrounds/*
 
 sed -i 's,AlmaLinux,HeliumOS,g' \
     /usr/lib/os-release
@@ -160,3 +166,6 @@ distribution come with their own licences. A copy of the GPLv2 license
 is included with the distribution media.
 EOF
 ln -sf /usr/share/heliumos-release/EULA /usr/share/redhat-release/EULA
+
+rm -rf \
+    /var/run

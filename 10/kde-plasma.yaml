@@ -1,0 +1,28 @@
+- name: Install KDE Plasma Desktop
+  ansible.builtin.dnf:
+    name:
+      - "@kde-desktop-environment"
+      - angelfish
+      - kcalc
+      - kolourpaint
+      - okular
+      - krdp
+    state: present
+
+- name: Install KDE Games
+  ansible.builtin.dnf:
+    name:
+      - kmines
+      - ksnakeduel
+      - ksudoku
+      - kreversi
+    state: present
+
+- name: Remove Unwanted KDE Apps
+  ansible.builtin.dnf:
+    name:
+      - krfb
+
+- name: Enable SDDM Display Manager
+  ansible.builtin.systemd_service:
+    enabled: true

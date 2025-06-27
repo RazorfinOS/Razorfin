@@ -9,10 +9,10 @@
       ansible.builtin.include_tasks: dev-tools.yaml
     - name: Bootc Tweaks
       ansible.builtin.include_tasks: bootc-tweaks.yaml
-    - name: Desktop
-      ansible.builtin.script: /workdir/desktop.sh
+    - name: KDE Plasma
+      ansible.builtin.include_tasks: kde-plasma.yaml
     - name: Firewall
-      ansible.builtin.script: /workdir/firewall.sh
+      ansible.builtin.include_tasks: firewall-config.yaml
     - name: Flatpak
       ansible.builtin.script: /workdir/flatpak.sh
     - name: Branding
