@@ -30,6 +30,5 @@
 
 - name: Disable Cockpit
   ansible.builtin.systemd_service:
-    name:
-      - cockpit.socket
+    name: cockpit.socket
     enabled: false
