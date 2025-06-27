@@ -23,6 +23,7 @@
     name:
       - krfb
 
-- name: Enable SDDM Display Manager
+- name: Configure systemd Services for KDE
   ansible.builtin.systemd_service:
+    name: sddm
     enabled: true
