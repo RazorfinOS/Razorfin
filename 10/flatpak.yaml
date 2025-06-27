@@ -1,0 +1,10 @@
+- name: Install Flatpak
+  ansible.builtin.dnf:
+    name:
+      - flatpak
+    state: present
+
+- name: Add Flatpak Remote Flathub
+  ansible.builtin.get_url:
+    url: https://dl.flathub.org/repo/flathub.flatpakrepo
+    dest: /etc/flatpak/remotes.d/flathub.flatpakrepo

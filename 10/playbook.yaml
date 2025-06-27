@@ -14,7 +14,7 @@
     - name: Firewall
       ansible.builtin.include_tasks: firewall-config.yaml
     - name: Flatpak
-      ansible.builtin.script: /workdir/flatpak.sh
+      ansible.builtin.include_tasks: flatpak.yaml
     - name: Branding
       ansible.builtin.script: /workdir/branding.sh
     - name: Hardware
