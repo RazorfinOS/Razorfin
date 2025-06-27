@@ -2,7 +2,8 @@ FROM quay.io/almalinuxorg/almalinux-bootc:10-kitten
 
 LABEL containers.bootc 1
 
-RUN dnf install -y ansible-core
+RUN dnf update -y > /dev/null
+RUN dnf install -y ansible-core > /dev/null
 
 WORKDIR /workdir
 
@@ -14,6 +15,10 @@ RUN cp -rf /workdir/system_root/* /
 RUN ansible-playbook playbook.yaml
 
 RUN rm -rdf /workdir
-RUN dnf remove -y ansible-core
+RUN dnf remove -y ansible-core > /dev/null
 
-RUN bootc container lint
+RUN bootc container lint --fatal-warnings \
+    --skip nonempty-boot \
+    --skip sysusers \
+    --skip var-log \
+    --skip var-tmpfiles
