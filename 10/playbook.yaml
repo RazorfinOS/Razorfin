@@ -19,7 +19,7 @@
       ansible.builtin.include_tasks: docker.yaml
     - name: Branding
       ansible.builtin.script: /workdir/branding.sh
-    - name: Hardware
-      ansible.builtin.script: /workdir/hardware.sh
+    - name: Hardware Compatibility
+      ansible.builtin.include_tasks: hardware-compat.yaml
     - name: Systemd
       ansible.builtin.script: /workdir/systemd.sh

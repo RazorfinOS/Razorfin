@@ -1,0 +1,19 @@
+- name: Install Gaming Hardware udev rules
+  ansible.builtin.dnf:
+    name:
+      - steam-devices
+    state: present
+
+- name: Install NVIDIA Drivers
+  ansible.builtin.dnf:
+    name:
+      - https://build.almalinux.org/pulp/content/builds/AlmaLinux-Kitten-10-x86_64-39017-br/Packages/k/kmod-nvidia-open-575.64-1.el10.x86_64.rpm \
+      - https://build.almalinux.org/pulp/content/builds/AlmaLinux-Kitten-10-x86_64-39017-br/Packages/n/nvidia-open-kmod-575.64-1.el10.x86_64.rpm
+
+    state: present
+
+- name: Rebuild initramfs
+  shell:
+    cmd: |
+      kver=$(cd /usr/lib/modules && echo * | awk '{print $1}')
+      dracut -vf /usr/lib/modules/$kver/initramfs.img $kver
