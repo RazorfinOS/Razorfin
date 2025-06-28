@@ -2,7 +2,9 @@
 contents = """
 
 autopart --type=btrfs --nohome
+clearpart --none --initlabel
 rootpw --lock
+timezone America/Chicago
 
 %post
 
