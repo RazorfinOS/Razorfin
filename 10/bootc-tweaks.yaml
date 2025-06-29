@@ -17,8 +17,8 @@
       mv /opt /var/opt
       ln -s /var/opt /opt
 
-- name: Set /usr/local mutable
+- name: Set /usr/ports mutable
   shell:
     cmd: |
-      mv /usr/local /var/usrlocal
-      ln -s /var/usrlocal /usr/local
+      mv /usr/ports /var/usrports
+      ln -s /var/usrports /usr/ports
