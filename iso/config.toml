@@ -1,10 +1,9 @@
 [customizations.installer.kickstart]
 contents = """
 
+autopart
 zerombr
-clearpart --all --initlabel
-reqpart --add-boot
-part / --grow --fstype ext4
+clearpart --none --initlabel
 
 rootpw --lock
 timezone America/Chicago
