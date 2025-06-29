@@ -1,8 +1,10 @@
 [customizations.installer.kickstart]
 contents = """
 
-autopart --type=plain --fstype=ext4 --nohome
-clearpart --none --initlabel
+clearpart --all --initlabel --disklabel=gpt
+reqpart --add-boot
+part / --grow --fstype xfs
+
 rootpw --lock
 timezone America/Chicago
 
