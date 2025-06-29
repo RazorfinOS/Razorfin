@@ -1,7 +1,7 @@
 [customizations.installer.kickstart]
 contents = """
 
-autopart --type=btrfs --nohome
+autopart --type=plain --fstype=ext4 --nohome
 clearpart --none --initlabel
 rootpw --lock
 timezone America/Chicago
