@@ -1,9 +1,10 @@
 [customizations.installer.kickstart]
 contents = """
 
-clearpart --all --initlabel --disklabel=gpt
+zerombr
+clearpart --all --initlabel
 reqpart --add-boot
-part / --grow --fstype xfs
+part / --grow --fstype btrfs
 
 rootpw --lock
 timezone America/Chicago
