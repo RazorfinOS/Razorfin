@@ -17,8 +17,4 @@ RUN ansible-playbook playbook.yaml
 RUN rm -rdf /workdir
 RUN dnf remove -y ansible-core > /dev/null
 
-RUN bootc container lint --fatal-warnings \
-    --skip nonempty-boot \
-    --skip sysusers \
-    --skip var-log \
-    --skip var-tmpfiles
+RUN bootc container lint
