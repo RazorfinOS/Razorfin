@@ -26,14 +26,7 @@ image:
 		.
 
 rechunk:
-	$(PODMAN) run \
-		--rm \
-		--privileged \
-		-v /var/lib/containers:/var/lib/containers \
-		quay.io/centos-bootc/centos-bootc:stream10 \
-		/usr/libexec/bootc-base-imagectl rechunk \
-			$(IMAGE):$(TAG) \
-			$(IMAGE):$(TAG)
+	$(SUDO) IMAGE=$(IMAGE):$(TAG) ./rechunk.sh
 
 push:
 	$(PODMAN) push \
