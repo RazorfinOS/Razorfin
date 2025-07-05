@@ -3,5 +3,4 @@
     name:
       - "@development"
       - distrobox
-      - squashfs-tools
     state: present
