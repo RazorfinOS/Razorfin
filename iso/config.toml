@@ -5,6 +5,8 @@ autopart --type=btrfs --nohome
 zerombr
 clearpart --none --initlabel
 
+network --bootproto=dhcp --device=link --activate
+
 rootpw --lock
 timezone America/Chicago
 
@@ -24,7 +26,6 @@ enable = [
     "org.fedoraproject.Anaconda.Modules.Users",
 ]
 disable = [
-    "org.fedoraproject.Anaconda.Modules.Network",
     "org.fedoraproject.Anaconda.Modules.Security",
     "org.fedoraproject.Anaconda.Modules.Services",
     "org.fedoraproject.Anaconda.Modules.Subscription",
