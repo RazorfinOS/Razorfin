@@ -7,6 +7,7 @@
       - kolourpaint
       - okular
       - krdp
+      - https://repo.almalinux.org/almalinux-kitten/10-kitten/AppStream/x86_64/os/Packages/qt6-qtwayland-6.9.1-1.el10.x86_64.rpm
     state: present
 
 - name: Install KDE Games
