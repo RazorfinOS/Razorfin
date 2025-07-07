@@ -10,6 +10,11 @@
       - https://repo.almalinux.org/almalinux-kitten/10-kitten/AppStream/x86_64/os/Packages/qt6-qtwayland-6.9.1-1.el10.x86_64.rpm
     state: present
 
+- name: Disable Plasma Discover KNS Backend
+  ansible.builtin.file:
+    path: /usr/lib64/qt6/plugins/discover/kns-backend.so
+    state: absent
+
 - name: Install KDE Games
   ansible.builtin.dnf:
     name:
