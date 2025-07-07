@@ -20,3 +20,6 @@ systemctl mask \
 
 systemctl enable \
     timedate-config.service
+
+systemctl enable \
+    heliumos-ports.service
