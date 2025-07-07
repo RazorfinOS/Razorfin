@@ -1,13 +1,19 @@
-- name: Disable extra upstream services
+- name: Disable atd service
   ansible.builtin.systemd_service:
-    name:
-      - atd
-      - rpm-ostree-countme
+    name: atd
     enabled: false
 
-- name: Enable HeliumOS services
+- name: Disable rpm-ostree-countme service
   ansible.builtin.systemd_service:
-    name:
-      - timedate-config
-      - heliumos-ports
+    name: rpm-ostree-countme
+    enabled: false
+
+- name: Enable HeliumOS timedate-config service
+  ansible.builtin.systemd_service:
+    name: timedate-config
+    enabled: true
+
+- name: Enable HeliumOS ports service
+  ansible.builtin.systemd_service:
+    name: heliumos-ports
     enabled: true
