@@ -1,9 +1,0 @@
-[Unit]
-Description=HeliumOS Ports mount service
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/make -C /usr/ports refresh
-
-[Install]
-WantedBy=multi-user.target

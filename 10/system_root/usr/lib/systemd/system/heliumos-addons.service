@@ -1,0 +1,9 @@
+[Unit]
+Description=HeliumOS Addons mount service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/make -C /usr/addons refresh
+
+[Install]
+WantedBy=multi-user.target

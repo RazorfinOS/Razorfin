@@ -12,8 +12,3 @@
   ansible.builtin.systemd_service:
     name: timedate-config
     enabled: true
-
-- name: Enable HeliumOS ports service
-  ansible.builtin.systemd_service:
-    name: heliumos-ports
-    enabled: true

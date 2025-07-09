@@ -21,5 +21,7 @@
       ansible.builtin.script: /workdir/branding.sh
     - name: Hardware Compatibility
       ansible.builtin.include_tasks: hardware-compat.yaml
+    - name: HeliumOS Addons
+      ansible.builtin.include_tasks: addons.yaml
     - name: systemd Services
       ansible.builtin.include_tasks: systemd.yaml
