@@ -1,0 +1,22 @@
+- name: Install Zsh
+  ansible.builtin.dnf:
+    name:
+      - zsh
+    state: present
+
+- name: Set default shell to Zsh
+  ansible.builtin.replace:
+    path: /etc/default/useradd
+    regexp: "bash"
+    replace: "zsh"
+
+- name: Set default Zsh config
+  ansible.builtin.copy:
+    content: |
+      autoload -Uz compinit promptinit
+      compinit
+      promptinit
+
+      PROMPT='%F{green}%n%f@%F{magenta}%m%f %F{blue}%B%~%b%f %# '
+      RPROMPT='[%F{yellow}%?%f]'
+    dest: /etc/skell/.zshrc
