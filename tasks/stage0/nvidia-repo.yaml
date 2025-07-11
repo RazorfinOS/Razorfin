@@ -1,0 +1,5 @@
+- name: Install NVIDIA dnf repository
+  ansible.builtin.dnf:
+    name:
+      - almalinux-release-nvidia-driver
+    state: present

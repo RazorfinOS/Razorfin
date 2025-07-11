@@ -1,0 +1,7 @@
+- ansible.builtin.import_tasks: ../stage0/dnf-config.yaml
+
+- name: Install SELinux Policy
+  ansible.builtin.dnf:
+    name:
+      - selinux-policy
+    state: present

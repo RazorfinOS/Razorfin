@@ -1,9 +1,3 @@
-- name: Install SELinux Policy
-  ansible.builtin.dnf:
-    name:
-      - selinux-policy
-    state: present
-
 - name: Patch Bootc update service to remove apply
   shell:
     cmd: |

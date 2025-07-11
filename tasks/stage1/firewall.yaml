@@ -1,3 +1,5 @@
+- ansible.builtin.import_tasks: ../stage0/dnf-config.yaml
+
 - name: Install Firewall Config App
   ansible.builtin.dnf:
     name:

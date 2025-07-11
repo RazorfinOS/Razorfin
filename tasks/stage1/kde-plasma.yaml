@@ -1,3 +1,7 @@
+- ansible.builtin.import_tasks: ../stage0/epel-repo.yaml
+
+- ansible.builtin.import_tasks: ../stage0/dnf-config.yaml
+
 - name: Install KDE Plasma Desktop
   ansible.builtin.dnf:
     name:

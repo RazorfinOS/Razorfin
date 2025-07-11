@@ -8,6 +8,10 @@ rm -rf \
 rm -rf \
     /usr/share/wallpapers/fedora
 rm -rf \
+    /usr/share/wallpapers/Fedora
+rm -rf \
+    /usr/share/wallpapers/F4*
+rm -rf \
     /usr/share/backgrounds/*
 
 sed -i 's,AlmaLinux,HeliumOS,g' \
@@ -94,18 +98,14 @@ do
     done
 done
 
-
 curl \
     -o wallpapers.tar.gz \
     https://codeberg.org/HeliumOS/wallpapers/archive/eccec97df37d4d5aee4f23e1e57b46c0e4e6c484.tar.gz
-
 tar -xzf \
-    wallpapers.tar.gz
-
-
+    wallpapers.tar.gz \
+    -C /workdir
 mkdir -p \
     /usr/share/wallpapers/Andromeda/contents/images
-
 cp \
     /workdir/wallpapers/andromeda.jpg \
     /usr/share/wallpapers/Andromeda/contents/images/5338x5905.jpg
@@ -169,3 +169,5 @@ ln -sf /usr/share/heliumos-release/EULA /usr/share/redhat-release/EULA
 
 rm -rf \
     /var/run
+
+rm /branding.sh

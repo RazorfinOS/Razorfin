@@ -1,8 +1,7 @@
-- name: Install dnf repos for EPEL, NVIDIA
+- name: Install dnf config-manager
   ansible.builtin.dnf:
     name:
-      - epel-release
-      - almalinux-release-nvidia-driver
+      - dnf-command(config-manager)
     state: present
 
 - name: Exclude unwanted packages

@@ -21,7 +21,10 @@ echo-tag:
 
 image:
 	$(PODMAN) build \
-		-f $(VERSION)/Containerfile \
+		--build-arg BASE=quay.io/almalinuxorg/almalinux-bootc:${VERSION}-kitten \
+		--build-arg PLAYBOOK=${VERSION}.yaml \
+		--network host \
+		-f Containerfile \
 		-t $(IMAGE):$(TAG) \
 		.
 

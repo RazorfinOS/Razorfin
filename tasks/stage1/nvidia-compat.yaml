@@ -1,0 +1,10 @@
+- ansible.builtin.import_tasks: ../stage0/dnf-config.yaml
+
+- ansible.builtin.import_tasks: ../stage0/nvidia-repo.yaml
+
+- name: Install NVIDIA Drivers
+  ansible.builtin.dnf:
+    name:
+      - kmod-nvidia-open
+      - nvidia-open-kmod
+    state: present

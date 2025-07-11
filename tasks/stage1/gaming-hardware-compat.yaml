@@ -1,0 +1,9 @@
+- ansible.builtin.import_tasks: ../stage0/epel-repo.yaml
+
+- ansible.builtin.import_tasks: ../stage0/dnf-config.yaml
+
+- name: Install Gaming Hardware udev rules
+  ansible.builtin.dnf:
+    name:
+      - steam-devices
+    state: present

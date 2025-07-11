@@ -1,0 +1,4 @@
+- name: HeliumOS 10
+  hosts: localhost
+  tasks:
+    - ansible.builtin.include_tasks: ../tasks/stage4/heliumos-base.yaml
