@@ -10,3 +10,9 @@
     cmd: |
       mv /opt /var/opt
       ln -s /var/opt /opt
+
+- name: Reboot on Kernel Panic
+  ansible.builtin.copy:
+    content: |
+      kargs = ["panic=3"]
+    dest: /usr/lib/bootc/kargs.d/10-kernel-panic-reboot.toml
