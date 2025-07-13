@@ -20,7 +20,16 @@
       - plymouth-theme-spinner
     state: present
 
-- name: Add EULA
+- name: Add EULA directories
+  ansible.builtin.file:
+    path: /usr/share/{{ item.vendor }}-release
+    state: directory
+  loop:
+    - { vendor: heliumos }
+    - { vendor: almalinux }
+    - { vendor: redhat }
+
+- name: Add EULA files
   ansible.builtin.copy:
     content: |
       HeliumOS 10 EULA
