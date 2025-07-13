@@ -2,3 +2,37 @@
 
 - name: Branding
   ansible.builtin.script: /workdir/files/branding.sh
+
+- name: Configure SDDM theme
+  shell:
+    cmd: |
+      sed -i \
+        's,#Current=01-breeze-fedora,Current=breeze,g' \
+        /etc/sddm.conf
+
+      sed -i \
+        's,/usr/share/wallpapers/Next/contents/images/5120x2880.png,/usr/share/wallpapers/Andromeda/contents/images/5338x5905.jpg,g' \
+        /usr/share/sddm/themes/breeze/theme.conf
+
+- name: Install Plymouth theme
+  ansible.builtin.dnf:
+    name:
+      - plymouth-theme-spinner
+    state: present
+
+- name: Add EULA
+  ansible.builtin.copy:
+    content: |
+      HeliumOS 10 EULA
+
+      HeliumOS 10 comes with no guarantees or warranties of any sorts,
+      either written or implied.
+
+      The Distribution is released as GPLv2. Individual packages in the
+      distribution come with their own licences. A copy of the GPLv2 license
+      is included with the distribution media.
+    dest: /usr/share/{{ item.vendor }}-release/EULA
+  loop:
+    - { vendor: heliumos }
+    - { vendor: almalinux }
+    - { vendor: redhat }

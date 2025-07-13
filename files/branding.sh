@@ -133,39 +133,12 @@ do
         /usr/share/plasma/look-and-feel/${lookandfeel}/contents/defaults
 done
 
-sed -i \
-    's,#Current=01-breeze-fedora,Current=breeze,g' \
-    /etc/sddm.conf
-
-sed -i \
-    's,/usr/share/wallpapers/Next/contents/images/5120x2880.png,/usr/share/wallpapers/Andromeda/contents/images/5338x5905.jpg,g' \
-    /usr/share/sddm/themes/breeze/theme.conf
-
-
 ln -s \
     /usr/share/wallpapers/Andromeda/contents/images/5338x5905.jpg \
     /usr/share/backgrounds/default.png
 
 dnf remove -y \
     console-login-helper-messages
-
-dnf install -y \
-    plymouth-theme-spinner
-
-
-mkdir -p \
-    /usr/share/heliumos-release
-cat <<EOF >>/usr/share/heliumos-release/EULA
-HeliumOS 10 EULA
-
-HeliumOS 10 comes with no guarantees or warranties of any sorts,
-either written or implied.
-
-The Distribution is released as GPLv2. Individual packages in the
-distribution come with their own licences. A copy of the GPLv2 license
-is included with the distribution media.
-EOF
-ln -sf /usr/share/heliumos-release/EULA /usr/share/redhat-release/EULA
 
 rm -rf \
     /var/run
