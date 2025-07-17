@@ -14,6 +14,7 @@ jobs:
     strategy:
       matrix:
         version: [10]
+        is_edge: [false, true]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -28,11 +29,12 @@ jobs:
         id: build
         env:
           IS_CANARY: ${{ inputs.is_canary }}
+          IS_EDGE: ${{ matrix.is_edge }}
           REGISTRY_IMAGE: ${{ vars.registry_image }}
           VERSION: ${{ matrix.version }}
         run: |
-          make image VERSION=${VERSION} IS_CANARY=${IS_CANARY}
-          export TAG=$(make echo-tag VERSION=${VERSION} IS_CANARY=${IS_CANARY})
+          make image VERSION=${VERSION} IS_CANARY=${IS_CANARY} IS_EDGE=${IS_EDGE}
+          export TAG=$(make echo-tag VERSION=${VERSION} IS_CANARY=${IS_CANARY} IS_EDGE=${IS_EDGE})
           
           export IMAGE=$(make echo-image)
 
@@ -67,5 +69,5 @@ jobs:
 
           sudo podman image tag ${RECHUNKED_IMAGE} ${{ steps.build.outputs.IMAGE }}:${{ steps.build.outputs.TAG }}
 
-          make push VERSION=${VERSION} IS_CANARY=${IS_CANARY}
+          make push VERSION=${VERSION} IS_CANARY=${IS_CANARY} IS_EDGE=${IS_EDGE}
 

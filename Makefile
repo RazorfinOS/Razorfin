@@ -1,14 +1,22 @@
-SUDO=sudo
-PODMAN = $(SUDO) podman
-IMAGE = quay.io/heliumos/bootc
-IS_CANARY = true
-VERSION = 10
-ARCH = x86_64
+SUDO := sudo
+PODMAN := $(SUDO) podman
+IMAGE := quay.io/heliumos/bootc
+IS_CANARY := true
+IS_EDGE := false
+VERSION := 10
+ARCH := x86_64
 
+TAG := $(VERSION)
 ifeq ($(IS_CANARY),true)
-	TAG = $(VERSION)-canary
-else
-	TAG = $(VERSION)
+	TAG := $(TAG)-canary
+endif
+ifeq ($(IS_EDGE),true)
+	TAG := $(TAG)-edge
+endif
+
+PLAYBOOK := $(VERSION)
+ifeq ($(IS_EDGE),true)
+	PLAYBOOK := $(PLAYBOOK)-edge
 endif
 
 .PHONY: echo-image echo-tag image push iso
@@ -21,8 +29,8 @@ echo-tag:
 
 image:
 	$(PODMAN) build \
-		--build-arg BASE=quay.io/almalinuxorg/almalinux-bootc:${VERSION}-kitten \
-		--build-arg PLAYBOOK=${VERSION}.yaml \
+		--build-arg BASE=quay.io/almalinuxorg/almalinux-bootc:$(VERSION)-kitten \
+		--build-arg PLAYBOOK=$(PLAYBOOK).yaml \
 		--network host \
 		-f Containerfile \
 		-t $(IMAGE):$(TAG) \
