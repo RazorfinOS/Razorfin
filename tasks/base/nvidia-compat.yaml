@@ -1,0 +1,6 @@
+- name: Install NVIDIA Drivers
+  ansible.builtin.dnf:
+    name:
+      - kmod-nvidia-open
+      - nvidia-open-kmod
+    state: present

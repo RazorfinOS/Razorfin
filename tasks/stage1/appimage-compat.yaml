@@ -1,7 +1,0 @@
-- ansible.builtin.import_tasks: ../stage0/dnf-config.yaml
-
-- name: Install FUSE
-  ansible.builtin.dnf:
-    name:
-      - fuse
-    state: present

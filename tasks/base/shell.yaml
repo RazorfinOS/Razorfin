@@ -1,5 +1,3 @@
-- ansible.builtin.import_tasks: ../stage0/dnf-config.yaml
-
 - name: Install Zsh
   ansible.builtin.dnf:
     name:

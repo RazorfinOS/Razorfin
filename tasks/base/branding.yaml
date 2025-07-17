@@ -1,5 +1,3 @@
-- ansible.builtin.import_tasks: ../stage1/kde-plasma.yaml
-
 - name: Branding
   ansible.builtin.script: /workdir/files/branding.sh
 

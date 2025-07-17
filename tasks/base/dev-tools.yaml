@@ -1,0 +1,6 @@
+- name: Install Development Tools
+  ansible.builtin.dnf:
+    name:
+      - "@development"
+      - distrobox
+    state: present
