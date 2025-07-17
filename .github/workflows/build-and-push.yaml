@@ -63,6 +63,7 @@ jobs:
       - name: Push to registry
         env:
           IS_CANARY: ${{ inputs.is_canary }}
+          IS_EDGE: ${{ matrix.is_edge }}
           VERSION: ${{ matrix.version }}
         run: |
           RECHUNKED_IMAGE=$(sudo podman pull ${{ steps.rechunk.outputs.ref }})
