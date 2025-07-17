@@ -1,4 +1,4 @@
-# - ansible.builtin.import_tasks: ../stage0/systemd.yaml
+- ansible.builtin.import_tasks: ../stage0/systemd.yaml
 
 - ansible.builtin.import_tasks: ../stage0/addons.yaml
 
