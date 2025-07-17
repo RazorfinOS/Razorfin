@@ -1,12 +1,12 @@
 SUDO=sudo
 PODMAN = $(SUDO) podman
 IMAGE = quay.io/heliumos/bootc
-VARIANT = canary
+IS_CANARY = true
 VERSION = 10
 ARCH = x86_64
 
-ifeq ($(VARIANT),canary)
-	TAG = $(VERSION)-$(VARIANT)
+ifeq ($(IS_CANARY),true)
+	TAG = $(VERSION)-canary
 else
 	TAG = $(VERSION)
 endif

@@ -31,13 +31,8 @@ jobs:
           REGISTRY_IMAGE: ${{ vars.registry_image }}
           VERSION: ${{ matrix.version }}
         run: |
-          if [[ ${IS_CANARY} == true ]]; then
-            make image VERSION=${VERSION} VARIANT=canary
-            export TAG=$(make echo-tag VERSION=${VERSION} VARIANT=canary)
-          else
-            make image VERSION=${VERSION} VARIANT=stable
-            export TAG=$(make echo-tag VERSION=${VERSION} VARIANT=stable)
-          fi
+          make image VERSION=${VERSION} IS_CANARY=${IS_CANARY}
+          export TAG=$(make echo-tag VERSION=${VERSION} IS_CANARY=${IS_CANARY})
           
           export IMAGE=$(make echo-image)
 
@@ -72,9 +67,5 @@ jobs:
 
           sudo podman image tag ${RECHUNKED_IMAGE} ${{ steps.build.outputs.IMAGE }}:${{ steps.build.outputs.TAG }}
 
-          if [[ ${IS_CANARY} == true ]]; then
-            make push VERSION=${VERSION} VARIANT=canary
-          else
-            make push VERSION=${VERSION} VARIANT=stable
-          fi
+          make push VERSION=${VERSION} IS_CANARY=${IS_CANARY}
 

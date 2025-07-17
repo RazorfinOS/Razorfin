@@ -30,10 +30,10 @@ jobs:
       - name: Build ISO
         env:
           VERSION: ${{ inputs.version }}
-          VARIANT: ${{ github.ref == 'refs/heads/dev' && 'canary' || 'stable' }}
+          IS_CANARY: ${{ github.ref == 'refs/heads/dev' && true || false }}
           ARCH: ${{ inputs.arch }}
         run: |
-          make iso VERSION=${VERSION} VARIANT=${VARIANT} ARCH=${ARCH}
+          make iso VERSION=${VERSION} IS_CANARY=${IS_CANARY} ARCH=${ARCH}
 
       - name: Upload iso
         uses: actions/upload-artifact@v4
