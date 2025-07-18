@@ -1,0 +1,20 @@
+- name: Install NVIDIA dnf repository (negativo)
+  shell:
+    cmd: |
+      dnf config-manager \
+        --add-repo=https://negativo17.org/repos/epel-nvidia.repo
+
+
+- name: Install NVIDIA dkms drivers
+  ansible.builtin.dnf:
+    name:
+      - nvidia-driver
+      - dkms-nvidia
+    state: present
+
+- name: Configure dkms for NVIDIA open driver
+  shell:
+    cmd: |
+      sed -i -e \
+        's/kernel$/kernel-open/g' \
+        /etc/nvidia/kernel.conf

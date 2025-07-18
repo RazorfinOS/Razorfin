@@ -1,0 +1,3 @@
+- ansible.builtin.import_tasks: ../base/base.yaml
+- ansible.builtin.import_tasks: ../edge/nvidia-dkms.yaml
+- ansible.builtin.import_tasks: ../post/post.yaml

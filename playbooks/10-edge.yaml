@@ -1,4 +1,4 @@
 - name: HeliumOS 10 Edge
   hosts: localhost
   tasks:
-    - ansible.builtin.include_tasks: ../tasks/base/base.yaml
+    - ansible.builtin.include_tasks: ../tasks/edge/edge.yaml

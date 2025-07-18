@@ -1,4 +1,4 @@
 - name: HeliumOS 10
   hosts: localhost
   tasks:
-    - ansible.builtin.include_tasks: ../tasks/base/base.yaml
+    - ansible.builtin.include_tasks: ../tasks/standard/standard.yaml

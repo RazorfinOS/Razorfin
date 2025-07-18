@@ -11,8 +11,6 @@
 - ansible.builtin.import_tasks: ../base/flatpak.yaml
 - ansible.builtin.import_tasks: ../base/gaming-hardware-compat.yaml
 - ansible.builtin.import_tasks: ../base/kde-plasma.yaml
-- ansible.builtin.import_tasks: ../base/nvidia-compat.yaml
 - ansible.builtin.import_tasks: ../base/selinux.yaml
 - ansible.builtin.import_tasks: ../base/shell.yaml
 - ansible.builtin.import_tasks: ../base/branding.yaml
-- ansible.builtin.import_tasks: ../base/initramfs.yaml
