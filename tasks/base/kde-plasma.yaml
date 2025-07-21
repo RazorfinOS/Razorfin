@@ -7,7 +7,7 @@
       - kolourpaint
       - okular
       - krdp
-      - https://repo.almalinux.org/almalinux-kitten/10-kitten/AppStream/x86_64/os/Packages/qt6-qtwayland-6.9.1-1.el10.x86_64.rpm
+      - https://dl.fedoraproject.org/pub/fedora/linux/updates/42/Everything/x86_64/Packages/q/qt6-qtwayland-6.9.1-3.fc42.x86_64.rpm
     state: present
 
 - name: Disable Plasma Discover KNS Backend
