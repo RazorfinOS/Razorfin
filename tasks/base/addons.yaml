@@ -8,3 +8,9 @@
   ansible.builtin.systemd_service:
     name: heliumos-addons
     enabled: true
+
+- name: Libraries for Addons
+  ansible.builtin.dnf:
+    name: 
+      - readline-devel
+    state: present
