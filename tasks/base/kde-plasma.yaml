@@ -1,3 +1,9 @@
+- name: Install Fedora GPG Keys
+  ansible.builtin.dnf:
+    name:
+      https://dl.fedoraproject.org/pub/fedora/linux/releases/42/Everything/x86_64/os/Packages/f/fedora-gpg-keys-42-1.noarch.rpm
+    disable_gpg_check: true
+
 - name: Install KDE Plasma Desktop
   ansible.builtin.dnf:
     name:
