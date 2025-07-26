@@ -44,8 +44,56 @@
     - { vendor: almalinux }
     - { vendor: redhat }
 
+- name: Create Plasma favorites defaults script for HeliumOS
+  ansible.builtin.copy:
+    content: |
+      #!/usr/bin/env bash
+
+      set -eoux pipefail
+
+      old_favorites=$(sqlite3 ~/.local/share/kactivitymanagerd/resources/database "SELECT targettedResource FROM 'ResourceLink';")
+ 
+      for fav in $old_favorites; do
+        qdbus-qt6 org.kde.ActivityManager /ActivityManager/Resources/Linking \
+          org.kde.ActivityManager.ResourcesLinking.UnlinkResourceFromActivity \
+          "org.kde.plasma.favorites.applications" \
+          "applications:$fav" \
+          ":global"
+      done
+
+      new_favorites="preferred://browser,org.kde.kontact.desktop,systemsettings.desktop,org.kde.dolphin.desktop,org.kde.kwrite.desktop,org.kde.konsole.desktop,org.kde.discover.desktop"
+ 
+      echo "$new_favorites" | tr ',' '\n' | while read -r fav; do
+        qdbus-qt6 org.kde.ActivityManager /ActivityManager/Resources/Linking \
+          org.kde.ActivityManager.ResourcesLinking.LinkResourceToActivity \
+          "org.kde.plasma.favorites.applications" \
+          "applications:$fav" \
+          ":global"
+      done
+    mode: '0755'
+
 - name: Install sqlite
   ansible.builtin.dnf:
     name:
       - sqlite
     state: present
+
+- name: Create Plasma favorites defaults service for HeliumOS
+  ansible.builtin.copy:
+    content: |
+      [Unit]
+      Description=Set default Plasma favorites service for HeliumOS
+      ConditionPathExists=!$HOME/.local/state/heliumos-plasma-favorites-set-defaults
+      Requires=plasma-kactivitymanagerd.service
+      After=plasma-workspace.target
+
+      [Service]
+      Type=oneshot
+      ExecStart=/usr/bin/bash -c '/usr/bin/heliumos-plasma-favorites-set-defaults && touch $HOME/.local/state/heliumos-plasma-favorites-set-defaults'
+    dest: /usr/lib/systemd/user/heliumos-plasma-favorites-set-defaults.service
+
+- name: Enable Plasma favorites defaults service for HeliumOs
+  ansible.builtin.file:
+    src: /usr/lib/systemd/user/heliumos-plasma-favorites-set-defaults.service
+    dest: /etc/systemd/user/plasma-workspace.target.wants/heliumos-plasma-favorites-set-defaults.service
+    state: link
