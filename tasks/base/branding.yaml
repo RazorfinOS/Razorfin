@@ -43,3 +43,9 @@
     - { vendor: heliumos }
     - { vendor: almalinux }
     - { vendor: redhat }
+
+- name: Install sqlite
+  ansible.builtin.dnf:
+    name:
+      - sqlite
+    state: present
