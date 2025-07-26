@@ -1,0 +1,10 @@
+[Unit]
+Description=Set default Plasma favorites service for HeliumOS
+ConditionPathExists=!$HOME/.local/state/heliumos-plasma-favorites-set-defaults
+Requires=plasma-kactivitymanagerd.service
+After=plasma-workspace.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bash -c '/usr/bin/heliumos-plasma-favorites-set-defaults && touch $HOME/.local/state/heliumos-plasma-favorites-set-defaults'
+
