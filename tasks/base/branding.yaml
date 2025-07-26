@@ -70,6 +70,7 @@
           "applications:$fav" \
           ":global"
       done
+    dest: /usr/bin/heliumos-plasma-favorites-set-defaults
     mode: '0755'
 
 - name: Install sqlite
