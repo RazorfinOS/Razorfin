@@ -16,11 +16,10 @@
     state: absent
 
 - name: Disable virtual keyboard
-  ansible.builtin.copy:
-    content: |
-      [Wayland]
-      VirtualKeyboardEnabled=false
-    dest: /usr/share/kde-settings/kde-profile/default/share/config/kwinrc
+  ansible.builtin.replace:
+    path: /usr/share/kde-settings/kde-profile/default/xdg/kwinrc
+    regexp: "VirtualKeyboardEnabled=true"
+    replace: "VirtualKeyboardEnabled=false"
 
 - name: Install KDE Games
   ansible.builtin.dnf:
