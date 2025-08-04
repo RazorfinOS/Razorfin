@@ -15,6 +15,13 @@
     path: /usr/lib64/qt6/plugins/discover/kns-backend.so
     state: absent
 
+- name: Disable virtual keyboard
+  ansible.builtin.copy:
+    content: |
+      [Wayland]
+      VirtualKeyboardEnabled=false
+    dest: /usr/share/kde-settings/kde-profile/default/share/config/kwinrc
+
 - name: Install KDE Games
   ansible.builtin.dnf:
     name:
