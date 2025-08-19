@@ -17,5 +17,6 @@
       - https://dl.fedoraproject.org/pub/epel/9/Everything/x86_64/Packages/p/pacman-6.0.2-3.el9.x86_64.rpm
       - https://dl.fedoraproject.org/pub/epel/9/Everything/x86_64/Packages/p/pacman-filesystem-6.0.2-3.el9.noarch.rpm
       - https://dl.fedoraproject.org/pub/epel/9/Everything/x86_64/Packages/l/libalpm-6.0.2-3.el9.x86_64.rpm
+      - libevent-devel
     state: present
     disable_gpg_check: true
