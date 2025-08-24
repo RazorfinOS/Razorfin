@@ -9,13 +9,11 @@
     name: heliumos-addons
     enabled: true
 
-- name: HeliumOS Addons
+- name: Libraries for Addons
   ansible.builtin.dnf:
     name: 
-      - https://dl.fedoraproject.org/pub/epel/10/Everything/x86_64/Packages/f/fakeroot-1.37-1.el10_0.x86_64.rpm
-      - https://dl.fedoraproject.org/pub/epel/10/Everything/x86_64/Packages/f/fakeroot-libs-1.37-1.el10_0.x86_64.rpm
+      - fakeroot
       - https://dl.fedoraproject.org/pub/epel/9/Everything/x86_64/Packages/p/pacman-6.0.2-3.el9.x86_64.rpm
       - https://dl.fedoraproject.org/pub/epel/9/Everything/x86_64/Packages/p/pacman-filesystem-6.0.2-3.el9.noarch.rpm
       - https://dl.fedoraproject.org/pub/epel/9/Everything/x86_64/Packages/l/libalpm-6.0.2-3.el9.x86_64.rpm
     state: present
-    disable_gpg_check: true
