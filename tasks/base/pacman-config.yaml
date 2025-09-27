@@ -1,0 +1,19 @@
+- name: Configure pacman to exclude unwanted packages
+  ansible.builtin.lineinfile:
+    path: /etc/pacman.conf
+    regexp: '^#?IgnorePkg\s*='
+    line: 'IgnorePkg = packagekit firefox'
+    state: present
+
+- name: Enable multilib repository
+  ansible.builtin.blockinfile:
+    path: /etc/pacman.conf
+    block: |
+      [multilib]
+      Include = /etc/pacman.d/mirrorlist
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - multilib"
+    state: present
+
+- name: Update package database
+  community.general.pacman:
+    update_cache: yes

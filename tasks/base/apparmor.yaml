@@ -1,0 +1,15 @@
+- name: Install AppArmor
+  community.general.pacman:
+    name:
+      - apparmor
+    state: present
+
+- name: Enable AppArmor service
+  ansible.builtin.file:
+    src: /usr/lib/systemd/system/apparmor.service
+    dest: /etc/systemd/system/multi-user.target.wants/apparmor.service
+    state: link
+  ignore_errors: true
+
+# AppArmor profiles will be configured automatically by the systemd service
+# when the system boots. No need to configure during container build.

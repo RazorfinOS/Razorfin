@@ -2,7 +2,7 @@
 
 set -xeou pipefail
 
-# IMAGE=quay.io/heliumos/bootc:10-canary
+# IMAGE=quay.io/razorfinos/bootc:10-canary
 echo ${IMAGE}
 export RECHUNKER="ghcr.io/hhd-dev/rechunk:v1.2.2"
 

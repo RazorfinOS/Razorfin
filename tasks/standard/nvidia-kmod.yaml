@@ -1,13 +1,6 @@
-- name: Install NVIDIA dnf repository
-  ansible.builtin.dnf:
+- name: Install NVIDIA drivers
+  community.general.pacman:
     name:
-      - almalinux-release-nvidia-driver
-    state: present
-
-
-- name: Install NVIDIA kmod drivers
-  ansible.builtin.dnf:
-    name:
-      - nvidia-driver
-      - nvidia-open-kmod
+      - nvidia
+      - nvidia-utils
     state: present

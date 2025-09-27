@@ -1,4 +1,4 @@
-- name: HeliumOS 10
+- name: RazorfinOS 1
   hosts: localhost
   tasks:
     - ansible.builtin.include_tasks: ../tasks/standard/standard.yaml

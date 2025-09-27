@@ -1,5 +1,5 @@
 [Unit]
-Description=HeliumOS Addons mount service
+Description=RazorfinOS Addons mount service
 
 [Service]
 Type=oneshot

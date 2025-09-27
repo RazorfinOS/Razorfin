@@ -1,5 +1,5 @@
 - name: Install FUSE
-  ansible.builtin.dnf:
+  community.general.pacman:
     name:
-      - fuse
+      - fuse2
     state: present

@@ -1,0 +1,45 @@
+- name: Create aurbuilder user for AUR operations
+  ansible.builtin.user:
+    name: aurbuilder
+    group: wheel
+    system: yes
+    create_home: yes
+    shell: /bin/bash
+
+- name: Allow aurbuilder sudo without password
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/aurbuilder
+    line: 'aurbuilder ALL=(ALL) NOPASSWD: ALL'
+    create: yes
+    mode: '0440'
+
+- name: Install git and build tools for AUR operations
+  community.general.pacman:
+    name:
+      - git
+      - base-devel
+      - sudo
+    state: present
+    extra_args: --overwrite '*'
+
+- name: Clone paru AUR helper
+  ansible.builtin.git:
+    repo: https://aur.archlinux.org/paru.git
+    dest: /tmp/paru
+    version: HEAD
+
+- name: Set ownership of paru directory to aurbuilder
+  ansible.builtin.file:
+    path: /tmp/paru
+    owner: aurbuilder
+    group: wheel
+    recurse: yes
+
+- name: Build and install paru
+  ansible.builtin.shell:
+    cmd: su - aurbuilder -c "cd /tmp/paru && makepkg -si --noconfirm"
+
+- name: Clean up paru build directory
+  ansible.builtin.file:
+    path: /tmp/paru
+    state: absent

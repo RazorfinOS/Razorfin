@@ -1,6 +1,6 @@
 - name: Install Development Tools
-  ansible.builtin.dnf:
+  community.general.pacman:
     name:
-      - "@development"
+      - base-devel
       - distrobox
     state: present

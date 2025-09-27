@@ -1,4 +1,4 @@
-- name: HeliumOS 10 Edge
+- name: RazorfinOS 1 Edge
   hosts: localhost
   tasks:
     - ansible.builtin.include_tasks: ../tasks/edge/edge.yaml

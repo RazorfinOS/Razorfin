@@ -1,8 +1,14 @@
 - name: Install Flatpak
-  ansible.builtin.dnf:
+  community.general.pacman:
     name:
       - flatpak
     state: present
+
+- name: Create Flatpak remotes directory
+  ansible.builtin.file:
+    path: /etc/flatpak/remotes.d
+    state: directory
+    mode: '0755'
 
 - name: Add Flatpak Remote Flathub
   ansible.builtin.get_url:

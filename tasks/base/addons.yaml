@@ -4,9 +4,9 @@
       mv /usr/addons /var/usraddons
       ln -s /var/usraddons /usr/addons
 
-# - name: Enable HeliumOS Addons service
+# - name: Enable RazorfinOS Addons service
 #   ansible.builtin.systemd_service:
-#     name: heliumos-addons
+#     name: razorfinos-addons
 #     enabled: true
 
 # - name: Libraries for Addons

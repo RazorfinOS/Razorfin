@@ -1,4 +1,4 @@
-name: HeliumOS Stable Release
+name: RazorfinOS Stable Release
 on:
   push:
     branches:

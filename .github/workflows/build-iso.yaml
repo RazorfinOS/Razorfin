@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'HeliumOS version to build'
+        description: 'RazorfinOS version to build'
         required: true
         type: string
-        default: '10'
+        default: '1'
       arch:
         description: 'CPU Architecture'
         required: true
@@ -27,6 +27,13 @@ jobs:
           sudo apt-get install -y \
             podman
 
+      - name: Log in to GitHub Container Registry
+        uses: redhat-actions/podman-login@v1
+        with:
+          username: ${{ secrets.registry_user || github.actor }}
+          password: ${{ secrets.registry_pass || secrets.GITHUB_TOKEN }}
+          registry: ghcr.io
+
       - name: Build ISO
         env:
           VERSION: ${{ inputs.version }}
@@ -38,5 +45,5 @@ jobs:
       - name: Upload iso
         uses: actions/upload-artifact@v4
         with:
-          path: out/HeliumOS*.iso
+          path: out/RazorfinOS*.iso
           retention-days: 7

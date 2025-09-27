@@ -23,16 +23,16 @@
     path: /usr/share/{{ item.vendor }}-release
     state: directory
   loop:
-    - { vendor: heliumos }
+    - { vendor: razorfinos }
     - { vendor: almalinux }
     - { vendor: redhat }
 
 - name: Add EULA files
   ansible.builtin.copy:
     content: |
-      HeliumOS 10 EULA
+      RazorfinOS 1 EULA
 
-      HeliumOS 10 comes with no guarantees or warranties of any sorts,
+      RazorfinOS 1 comes with no guarantees or warranties of any sorts,
       either written or implied.
 
       The Distribution is released as GPLv2. Individual packages in the
@@ -40,11 +40,11 @@
       is included with the distribution media.
     dest: /usr/share/{{ item.vendor }}-release/EULA
   loop:
-    - { vendor: heliumos }
+    - { vendor: razorfinos }
     - { vendor: almalinux }
     - { vendor: redhat }
 
-- name: Create Plasma favorites defaults script for HeliumOS
+- name: Create Plasma favorites defaults script for RazorfinOS
   ansible.builtin.copy:
     content: |
       #!/usr/bin/env bash
@@ -70,7 +70,7 @@
           "applications:$fav" \
           ":global"
       done
-    dest: /usr/bin/heliumos-plasma-favorites-set-defaults
+    dest: /usr/bin/razorfinos-plasma-favorites-set-defaults
     mode: '0755'
 
 - name: Install sqlite
@@ -79,22 +79,22 @@
       - sqlite
     state: present
 
-- name: Create Plasma favorites defaults service for HeliumOS
+- name: Create Plasma favorites defaults service for RazorfinOS
   ansible.builtin.copy:
     content: |
       [Unit]
-      Description=Set default Plasma favorites service for HeliumOS
-      ConditionPathExists=!%s/.local/state/heliumos-plasma-favorites-set-defaults
+      Description=Set default Plasma favorites service for RazorfinOS
+      ConditionPathExists=!%s/.local/state/razorfinos-plasma-favorites-set-defaults
       Requires=plasma-kactivitymanagerd.service
       After=plasma-workspace.target
 
       [Service]
       Type=oneshot
-      ExecStart=/usr/bin/bash -c '/usr/bin/heliumos-plasma-favorites-set-defaults && touch $HOME/.local/state/heliumos-plasma-favorites-set-defaults'
-    dest: /usr/lib/systemd/user/heliumos-plasma-favorites-set-defaults.service
+      ExecStart=/usr/bin/bash -c '/usr/bin/razorfinos-plasma-favorites-set-defaults && touch $HOME/.local/state/razorfinos-plasma-favorites-set-defaults'
+    dest: /usr/lib/systemd/user/razorfinos-plasma-favorites-set-defaults.service
 
-- name: Enable Plasma favorites defaults service for HeliumOs
+- name: Enable Plasma favorites defaults service for razorfinos
   ansible.builtin.file:
-    src: /usr/lib/systemd/user/heliumos-plasma-favorites-set-defaults.service
-    dest: /etc/systemd/user/plasma-workspace.target.wants/heliumos-plasma-favorites-set-defaults.service
+    src: /usr/lib/systemd/user/razorfinos-plasma-favorites-set-defaults.service
+    dest: /etc/systemd/user/plasma-workspace.target.wants/razorfinos-plasma-favorites-set-defaults.service
     state: link

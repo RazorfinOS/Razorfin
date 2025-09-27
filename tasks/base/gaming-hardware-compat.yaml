@@ -1,5 +1,5 @@
 - name: Install Gaming Hardware udev rules
-  ansible.builtin.dnf:
+  community.general.pacman:
     name:
-      - steam-devices
+      - steam
     state: present

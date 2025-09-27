@@ -1,5 +1,5 @@
 [Unit]
-Description=HeliumOS timedate configuration service
+Description=RazorfinOS timedate configuration service
 
 [Service]
 Type=oneshot

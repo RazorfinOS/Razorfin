@@ -10,10 +10,10 @@ on:
 
 jobs:
   build_and_push:
-    runs-on: blacksmith-2vcpu-ubuntu-2404
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
-        version: [10]
+        version: [1]
         is_edge: [false, true]
     steps:
       - name: Checkout repository
@@ -24,6 +24,18 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y \
             podman
+
+      - name: Install cosign
+        uses: sigstore/cosign-installer@v3.7.0
+        with:
+          cosign-release: 'v2.4.1'
+
+      - name: Log in to GitHub Container Registry
+        uses: redhat-actions/podman-login@v1
+        with:
+          username: ${{ secrets.registry_user || github.actor }}
+          password: ${{ secrets.registry_pass || secrets.GITHUB_TOKEN }}
+          registry: ghcr.io
 
       - name: Build image
         id: build
@@ -52,14 +64,6 @@ jobs:
           pretty: ${{ steps.build.outputs.TAG }}
           revision: ${{ github.sha }}
 
-      - name: Login to registry
-        env:
-          REGISTRY_USER: ${{ secrets.registry_user }}
-          REGISTRY_PASS: ${{ secrets.registry_pass }}
-          REGISTRY: ${{ vars.registry }}
-        run: |
-          sudo podman login --username $REGISTRY_USER --password $REGISTRY_PASS $REGISTRY
-
       - name: Push to registry
         env:
           IS_CANARY: ${{ inputs.is_canary }}
@@ -71,4 +75,13 @@ jobs:
           sudo podman image tag ${RECHUNKED_IMAGE} ${{ steps.build.outputs.IMAGE }}:${{ steps.build.outputs.TAG }}
 
           make push VERSION=${VERSION} IS_CANARY=${IS_CANARY} IS_EDGE=${IS_EDGE}
+
+      - name: Sign container image
+        env:
+          COSIGN_PRIVATE_KEY: ${{ secrets.COSIGN_PRIVATE_KEY }}
+          COSIGN_PASSWORD: ${{ secrets.COSIGN_PASSWORD }}
+        run: |
+          echo "${COSIGN_PRIVATE_KEY}" > cosign.key
+          cosign sign --key cosign.key --yes ${{ steps.build.outputs.IMAGE }}:${{ steps.build.outputs.TAG }}
+          rm -f cosign.key
 

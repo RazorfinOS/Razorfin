@@ -1,5 +1,0 @@
-- name: Install SELinux Policy
-  ansible.builtin.dnf:
-    name:
-      - selinux-policy
-    state: present

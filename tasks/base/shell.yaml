@@ -1,5 +1,5 @@
 - name: Install Zsh
-  ansible.builtin.dnf:
+  community.general.pacman:
     name:
       - zsh
     state: present

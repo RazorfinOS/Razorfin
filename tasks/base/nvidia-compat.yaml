@@ -1,6 +1,5 @@
 - name: Install NVIDIA Drivers
-  ansible.builtin.dnf:
+  community.general.pacman:
     name:
-      - kmod-nvidia-open
-      - nvidia-open-kmod
+      - nvidia-open
     state: present

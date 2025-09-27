@@ -8,7 +8,16 @@
     path: /etc/systemd/system/timers.target.wants/rpm-ostree-countme.timer
     state: absent
 
-- name: Enable HeliumOS timedate-config service
+- name: Create systemd wants directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: '0755'
+  loop:
+    - /etc/systemd/system/multi-user.target.wants
+    - /etc/systemd/system/timers.target.wants
+
+- name: Enable RazorfinOS timedate-config service
   ansible.builtin.file:
     src: /usr/lib/systemd/system/timedate-config.service
     dest: /etc/systemd/system/multi-user.target.wants/timedate-config.service
