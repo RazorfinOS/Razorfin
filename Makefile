@@ -1,6 +1,6 @@
 SUDO := sudo
 PODMAN := podman
-IMAGE := ghcr.io/razorfinos/razorfin
+IMAGE := ghcr.io/razorfinos-org/razorfin
 IS_CANARY := true
 IS_EDGE := false
 VERSION := 1

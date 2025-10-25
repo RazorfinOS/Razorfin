@@ -166,14 +166,14 @@ make help               # Show help message
 Key Makefile variables you can customize:
 
 ```makefile
-IMAGE := ghcr.io/razorfinos/razorfin # Registry image name
-IS_CANARY := true                     # Canary vs stable
-IS_EDGE := false                      # Standard vs edge
-VERSION := 1                          # Version number
-ARCH := x86_64                        # Architecture
-SIZE := 100G                          # VM image size
-FORMAT := qcow2                       # VM image format
-FILESYSTEM := ext4                    # Filesystem type
+IMAGE := ghcr.io/razorfinos-org/razorfin # Registry image name
+IS_CANARY := true                        # Canary vs stable
+IS_EDGE := false                         # Standard vs edge
+VERSION := 1                             # Version number
+ARCH := x86_64                           # Architecture
+SIZE := 100G                             # VM image size
+FORMAT := qcow2                          # VM image format
+FILESYSTEM := ext4                       # Filesystem type
 ```
 
 ### CI/CD Workflows
@@ -193,7 +193,7 @@ RazorfinOS uses GitHub Actions for automated builds:
 |-----------|-----------|
 | Base OS | Arch Linux |
 | Container Tech | bootc (boot container) |
-| Base Image | `ghcr.io/razorfinos/base:latest` |
+| Base Image | `ghcr.io/razorfinos-org/base:latest` |
 | Config Management | Ansible |
 | Desktop Environment | KDE Plasma |
 | Package Manager | pacman + paru (AUR) |
@@ -205,32 +205,32 @@ RazorfinOS uses GitHub Actions for automated builds:
 
 ```
 RazorfinOS/
-├── .github/workflows/    # CI/CD automation
-├── playbooks/           # Ansible playbooks for variants
-├── tasks/               # Modular Ansible tasks
-│   ├── base/           # Common configuration
-│   ├── edge/           # Edge variant tasks
-│   ├── standard/       # Standard variant tasks
-│   └── post/           # Post-installation tasks
-├── files/              # Static system files
-│   ├── etc/           # System configuration
-│   └── usr/           # User space files
-├── iso/                # ISO creation configuration
-├── Makefile            # Build automation
-├── Containerfile       # Container build definition
-└── rechunk.sh          # Image optimization script
+├── .github/workflows/     # CI/CD automation
+├── playbooks/             # Ansible playbooks for variants
+├── tasks/                 # Modular Ansible tasks
+│   ├── base/              # Common configuration
+│   ├── edge/              # Edge variant tasks
+│   ├── standard/          # Standard variant tasks
+│   └── post/              # Post-installation tasks
+├── files/                 # Static system files
+│   ├── etc/               # System configuration
+│   └── usr/               # User space files
+├── iso/                   # ISO creation configuration
+├── Makefile               # Build automation
+├── Containerfile          # Container build definition
+└── rechunk.sh             # Image optimization script
 ```
 
 ### Base Image
 
-RazorfinOS uses a custom base image (`ghcr.io/razorfinos/base:latest`) that provides:
+RazorfinOS uses a custom base image (`ghcr.io/razorfinos-org/base:latest`) that provides:
 
 - **Clean pacman database**: All packages properly tracked
 - **Pre-installed dependencies**: Common packages for faster builds
 - **Proper bootc structure**: Correctly configured ostree/bootc layout
 - **Maintained packages**: Regular updates with security patches
 
-The base image is maintained in a separate repository: `../razorfinos-base/`
+The base image is maintained in a separate repository: `../base/`
 
 ### Configuration Management
 

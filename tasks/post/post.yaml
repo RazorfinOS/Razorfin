@@ -1,1 +1,2 @@
 - ansible.builtin.import_tasks: ../post/initramfs.yaml
+- ansible.builtin.import_tasks: ../post/cache-cleanup.yaml

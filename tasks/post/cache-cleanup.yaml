@@ -1,0 +1,11 @@
+- name: Clean pacman package cache
+  ansible.builtin.shell: |
+    pacman -Scc --noconfirm
+    rm -rf /var/cache/pacman/pkg/*
+  args:
+    executable: /bin/bash
+
+- name: Remove aurbuilder home directory and cargo cache
+  ansible.builtin.file:
+    path: /var/home/aurbuilder
+    state: absent

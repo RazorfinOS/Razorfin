@@ -1,4 +1,4 @@
-ARG BASE=ghcr.io/razorfinos/base:latest
+ARG BASE=ghcr.io/razorfinos-org/base:latest
 
 FROM ${BASE}
 
@@ -11,8 +11,8 @@ WORKDIR /workdir
 COPY . .
 RUN cp -rf /workdir/files/* /
 
-RUN ansible-playbook /workdir/playbooks/${PLAYBOOK}
-
-RUN rm -rdf /workdir /var/log /var/cache/pacman/pkg/*
+RUN ansible-playbook /workdir/playbooks/${PLAYBOOK} && \
+    rm -rf /var/cache/pacman/pkg/* && \
+    rm -rf /workdir /var/log
 
 RUN bootc container lint

@@ -1,0 +1,61 @@
+- name: Install Cosmic Desktop Environment
+  community.general.pacman:
+    name:
+      - cosmic-session
+      - cosmic-greeter
+      - cosmic-comp
+      - cosmic-panel
+      - cosmic-launcher
+      - cosmic-settings
+      - cosmic-settings-daemon
+      - cosmic-applets
+      - cosmic-bg
+      - cosmic-icon-theme
+      - cosmic-wallpapers
+      - cosmic-idle
+      - cosmic-notifications
+      - cosmic-osd
+      - cosmic-workspaces
+      - cosmic-randr
+      - xdg-desktop-portal-cosmic
+    state: present
+
+- name: Install Cosmic Applications
+  community.general.pacman:
+    name:
+      - cosmic-terminal
+      - cosmic-files
+      - cosmic-text-editor
+      - cosmic-store
+      - cosmic-screenshot
+    state: present
+
+- name: Install greetd display manager
+  community.general.pacman:
+    name:
+      - greetd
+    state: present
+
+- name: Configure greetd to use Cosmic Greeter
+  ansible.builtin.copy:
+    content: |
+      [terminal]
+      vt = 1
+
+      [default_session]
+      command = "cosmic-greeter"
+      user = "greeter"
+    dest: /etc/greetd/config.toml
+    mode: '0644'
+
+- name: Enable greetd display manager
+  ansible.builtin.file:
+    src: /usr/lib/systemd/system/greetd.service
+    dest: /etc/systemd/system/display-manager.service
+    state: link
+  ignore_errors: true
+
+- name: Disable Cockpit socket
+  ansible.builtin.file:
+    path: /etc/systemd/system/sockets.target.wants/cockpit.socket
+    state: absent

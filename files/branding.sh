@@ -3,17 +3,6 @@
 
 set -xeuo pipefail
 
-rm -rf \
-    /usr/share/plasma/look-and-feel/org.fedoraproject.fedora.desktop
-rm -rf \
-    /usr/share/wallpapers/fedora
-rm -rf \
-    /usr/share/wallpapers/Fedora
-rm -rf \
-    /usr/share/wallpapers/F4*
-rm -rf \
-    /usr/share/backgrounds/*
-
 sed -i 's,AlmaLinux,RazorfinOS,g' \
     /usr/lib/os-release
 sed -i 's, (Purple Lion),,g' \
@@ -81,64 +70,8 @@ ln -sf \
     /usr/share/icons/hicolor/64x64/apps/razorfinos-logo-icon.png \
     /usr/share/pixmaps/fedora-logo-small.png
 
-
-declare -a plasma_themes=("breeze" "breeze-dark")
-declare -a icon_sizes=("16" "22" "32" "64" "96")
-declare -a start_here_variants=("start-here-kde-plasma.svg" "start-here-kde.svg" "start-here-kde-plasma-symbolic.svg" "start-here-kde-symbolic.svg" "start-here-symbolic.svg")
-for plasma_theme in "${plasma_themes[@]}"
-do
-    for icon_size in "${icon_sizes[@]}"
-    do
-        for start_here_variant in "${start_here_variants[@]}"
-        do
-                ln -sf \
-                    /usr/share/icons/hicolor/scalable/apps/razorfinos-logo-icon.svg \
-                    /usr/share/icons/${plasma_theme}/places/${icon_size}/${start_here_variant}
-        done
-    done
-done
-
-curl \
-    -o wallpapers.tar.gz \
-    https://codeberg.org/RazorfinOS/wallpapers/archive/eccec97df37d4d5aee4f23e1e57b46c0e4e6c484.tar.gz
-tar -xzf \
-    wallpapers.tar.gz \
-    -C /workdir
-mkdir -p \
-    /usr/share/wallpapers/Andromeda/contents/images
-cp \
-    /workdir/wallpapers/andromeda.jpg \
-    /usr/share/wallpapers/Andromeda/contents/images/5338x5905.jpg
-
-cat <<EOF >>/usr/share/wallpapers/Andromeda/metadata.json
-{
-    "KPlugin": {
-        "Authors": [
-            {
-                "Name": "RazorfinOS"
-            }
-        ],
-        "Id": "Andromeda",
-        "Name": "Andromeda"
-    }
-}
-EOF
-
-
-declare -a lookandfeels=("org.kde.breeze.desktop" "org.kde.breezedark.desktop" "org.kde.breezetwilight.desktop")
-for lookandfeel in "${lookandfeels[@]}"
-do
-    sed -i \
-        's,Image=Next,Image=Andromeda,g' \
-        /usr/share/plasma/look-and-feel/${lookandfeel}/contents/defaults
-done
-
-ln -s \
-    /usr/share/wallpapers/Andromeda/contents/images/5338x5905.jpg \
-    /usr/share/backgrounds/default.png
-
-dnf remove -y \
-    console-login-helper-messages
+pacman -R --noconfirm \
+    console-login-helper-messages || true
 
 rm -rf \
     /var/run

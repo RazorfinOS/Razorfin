@@ -12,12 +12,27 @@ jobs:
   build_and_push:
     runs-on: ubuntu-24.04
     strategy:
+      fail-fast: false
+      max-parallel: 1
       matrix:
         version: [1]
         is_edge: [false, true]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      - name: Maximize build space
+        run: |
+          echo "Disk space before cleanup:"
+          df -h
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /opt/hostedtoolcache/CodeQL
+          sudo docker image prune --all --force
+          sudo podman system prune -a -f || true
+          echo "Disk space after cleanup:"
+          df -h
 
       - name: Install build dependencies
         run: |
@@ -47,33 +62,18 @@ jobs:
         run: |
           make image VERSION=${VERSION} IS_CANARY=${IS_CANARY} IS_EDGE=${IS_EDGE}
           export TAG=$(make echo-tag VERSION=${VERSION} IS_CANARY=${IS_CANARY} IS_EDGE=${IS_EDGE})
-          
+
           export IMAGE=$(make echo-image)
 
           echo "TAG=${TAG}" >> $GITHUB_OUTPUT
           echo "IMAGE=${IMAGE}" >> $GITHUB_OUTPUT
-      
-      - name: Run Rechunker
-        id: rechunk
-        uses: hhd-dev/rechunk@ded27feba22df48134eece2c66ba0fca1289ff40 # v1.2.3
-        with:
-          rechunk: "ghcr.io/hhd-dev/rechunk:v1.2.2"
-          ref: ${{ steps.build.outputs.IMAGE }}:${{ steps.build.outputs.TAG }}
-          skip_compression: true
-          version: ${{ steps.build.outputs.TAG }}
-          pretty: ${{ steps.build.outputs.TAG }}
-          revision: ${{ github.sha }}
 
-      - name: Push to registry
+      - name: Push image to registry
         env:
           IS_CANARY: ${{ inputs.is_canary }}
           IS_EDGE: ${{ matrix.is_edge }}
           VERSION: ${{ matrix.version }}
         run: |
-          RECHUNKED_IMAGE=$(sudo podman pull ${{ steps.rechunk.outputs.ref }})
-
-          sudo podman image tag ${RECHUNKED_IMAGE} ${{ steps.build.outputs.IMAGE }}:${{ steps.build.outputs.TAG }}
-
           make push VERSION=${VERSION} IS_CANARY=${IS_CANARY} IS_EDGE=${IS_EDGE}
 
       - name: Sign container image
@@ -84,4 +84,18 @@ jobs:
           echo "${COSIGN_PRIVATE_KEY}" > cosign.key
           cosign sign --key cosign.key --yes ${{ steps.build.outputs.IMAGE }}:${{ steps.build.outputs.TAG }}
           rm -f cosign.key
+
+      - name: Cleanup after build
+        if: always()
+        run: |
+          echo "Cleaning up container storage before next matrix run..."
+          sudo podman system prune -a -f || true
+          sudo rm -rf /home/runner/.local/share/containers/storage/overlay-layers/* 2>/dev/null || true
+
+      - name: Check disk space
+        if: always()
+        run: |
+          df -h
+          echo "Container storage usage:"
+          du -sh /home/runner/.local/share/containers/storage/* 2>/dev/null || echo "Storage dir not found"
 

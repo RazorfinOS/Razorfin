@@ -9,7 +9,7 @@
 - ansible.builtin.import_tasks: ../base/firewall.yaml
 - ansible.builtin.import_tasks: ../base/flatpak.yaml
 - ansible.builtin.import_tasks: ../base/gaming-hardware-compat.yaml
-- ansible.builtin.import_tasks: ../base/kde-plasma.yaml
+- ansible.builtin.import_tasks: ../base/cosmic.yaml
 - ansible.builtin.import_tasks: ../base/apparmor.yaml
 - ansible.builtin.import_tasks: ../base/shell.yaml
 # - ansible.builtin.import_tasks: ../base/branding.yaml
