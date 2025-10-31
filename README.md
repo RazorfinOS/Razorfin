@@ -5,7 +5,7 @@
 >
 > RazorfinOS is currently in active development and is **not ready for production use**. This is an experimental proof of concept to explore bootc technology with Arch Linux. Expect breaking changes, incomplete features, and potential instability. Use at your own risk and do not rely on this for critical systems.
 
-RazorfinOS is a desktop operating system built on Arch Linux using bootc (bootable container) technology. It delivers a modern, secure desktop experience with KDE Plasma, combining the power of Arch Linux with atomic updates and container-based system management.
+RazorfinOS is a desktop operating system built on Arch Linux using bootc (bootable container) technology. It delivers a modern, secure desktop experience with System76's COSMIC desktop environment, combining the power of Arch Linux with atomic updates and container-based system management.
 
 **Note**: RazorfinOS is a fork of [HeliumOS](https://github.com/HeliumOS-org/HeliumOS), adapted for experimentation with bootc on Arch Linux.
 
@@ -17,16 +17,16 @@ RazorfinOS is a desktop operating system built on Arch Linux using bootc (bootab
 - **OSTree Foundation**: Leverages ostree for reliable system versioning
 - **Mutable Paths**: Strategic mutable directories (`/opt`, `/usr/addons`) for flexibility
 
-### KDE Plasma Desktop Experience
-- **Modern Desktop**: Full KDE Plasma desktop environment with Qt6
-- **Rich Application Suite**: kde-applications, Kvantum theming, and curated defaults
-- **SDDM Login Manager**: Customized display manager with overlay-mounted themes
-- **Gaming Suite**: Built-in KDE games (KMines, Ksnakeduel, Ksudoku, Kreversi)
+### COSMIC Desktop Experience
+- **Modern Desktop**: System76's COSMIC desktop environment built with Rust
+- **Rich Application Suite**: COSMIC native apps (Files, Terminal, Text Editor, Store, Settings)
+- **Cosmic Greeter**: Modern login manager with greetd backend
+- **Wayland Native**: Full Wayland support with cosmic-comp compositor
+- **Customizable**: Extensible with COSMIC applets and cosmic-panel
 
 ### Arch Linux Base & AUR Access
 - **Rolling Release**: Built on Arch Linux for cutting-edge software
 - **pacman Package Manager**: Fast, powerful package management
-- **AUR Support**: Full access to the Arch User Repository via paru
 - **Community Packages**: Thousands of packages at your fingertips
 
 ### Gaming & NVIDIA Support
@@ -55,15 +55,7 @@ RazorfinOS is available in multiple variants to suit different needs:
 
 ## Installation
 
-### Installing from ISO
-
-1. **Download** the latest RazorfinOS ISO from releases
-2. **Create bootable media** using your preferred tool (Ventoy, Rufus, dd)
-3. **Boot from the media** and follow the Anaconda installer
-4. **Customize** timezone, user account, and disk layout
-5. **Reboot** into your new RazorfinOS system
-
-### Direct Disk Installation
+## Direct Disk Installation
 
 Install directly to a disk using bootc:
 
@@ -195,7 +187,8 @@ RazorfinOS uses GitHub Actions for automated builds:
 | Container Tech | bootc (boot container) |
 | Base Image | `ghcr.io/razorfinos-org/base:latest` |
 | Config Management | Ansible |
-| Desktop Environment | KDE Plasma |
+| Desktop Environment | COSMIC (Rust-based) |
+| Display Manager | greetd + cosmic-greeter |
 | Package Manager | pacman + paru (AUR) |
 | Security Framework | AppArmor |
 | Container Registry | ghcr.io |
@@ -225,12 +218,10 @@ RazorfinOS/
 
 RazorfinOS uses a custom base image (`ghcr.io/razorfinos-org/base:latest`) that provides:
 
-- **Clean pacman database**: All packages properly tracked
-- **Pre-installed dependencies**: Common packages for faster builds
-- **Proper bootc structure**: Correctly configured ostree/bootc layout
+- **Clean pacman database**: All packages properly tracked, eliminating `--overwrite` conflicts
+- **Pre-installed dependencies**: Common packages (ansible, git, zsh, etc.) for faster builds
+- **Proper bootc structure**: Correctly configured ostree/bootc filesystem layout
 - **Maintained packages**: Regular updates with security patches
-
-The base image is maintained in a separate repository: `../base/`
 
 ### Configuration Management
 
@@ -243,7 +234,7 @@ All system configuration is managed through Ansible:
 
 Key task categories:
 - Package management (pacman, AUR)
-- Desktop environment (KDE Plasma, SDDM)
+- Desktop environment (COSMIC, greetd)
 - Security (AppArmor, firewalld)
 - Development tools (Docker, Distrobox)
 - Gaming support (NVIDIA, Steam)
@@ -279,4 +270,4 @@ See [LICENSE.md](LICENSE.md) for the full license text.
 
 ---
 
-**RazorfinOS** - A modern, immutable desktop OS built on Arch Linux with bootc technology.
+**RazorfinOS** - A modern, containerized desktop OS built on Arch Linux with bootc technology.

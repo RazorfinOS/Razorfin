@@ -2,7 +2,7 @@
 
 Version 2, June 1991
 
-    Copyright (C) 2024 Isaac Beverly
+    Copyright (C) 2025 Ahmed Adan 
 
     Everyone is permitted to copy and distribute verbatim copies
     of this license document, but changing it is not allowed.
